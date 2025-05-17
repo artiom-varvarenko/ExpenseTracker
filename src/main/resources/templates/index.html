@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="~{fragments/heading :: heading(title='Home')}"></th:block>
+</head>
+<body>
+<th:block th:insert="~{fragments/layout :: header(currentPage = 'home')}"></th:block>
+<main class="container">
+    <div class="jumbotron">
+        <h1>Welcome to Expense Tracker</h1>
+        <p class="lead">Track your expenses, categorize them, and gain insights into your spending habits.</p>
+        <hr class="my-4">
+        <p>This application helps you manage your personal finances effectively.</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </div>
+</main>
+<th:block th:insert="~{fragments/layout :: footer}"></th:block>
+</body>
+</html>

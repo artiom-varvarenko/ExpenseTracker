@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:17.2-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: 'expensetracker'
+      POSTGRES_USER: 'spring'
+      POSTGRES_PASSWORD: 'spring'
+    ports:
+      - '5433:5432'  # Changed from 5432:5432 to 5433:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:
