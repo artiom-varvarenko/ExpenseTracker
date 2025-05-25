@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Expense Tracker</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <div th:replace="fragments/layout :: header('admin')"></div>
+    
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2>Admin Dashboard</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-success">
+                            <strong>Welcome, Admin!</strong> You have special privileges to manage users and expenses.
+                        </div>
+                        <p>Total users: <span class="badge bg-info" th:text="${users.size()}">0</span></p>
+                        <p>Total expenses: <span class="badge bg-info" th:text="${totalExpenses}">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>User Management</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="user : ${users}">
+                                        <td th:text="${user.id}">1</td>
+                                        <td th:text="${user.name}">John Doe</td>
+                                        <td th:text="${user.email}">john@example.com</td>
+                                        <td>
+                                            <span th:if="${user.role == 'ROLE_ADMIN'}" class="badge bg-danger">Admin</span>
+                                            <span th:if="${user.role == 'ROLE_MANAGER'}" class="badge bg-warning">Manager</span>
+                                            <span th:if="${user.role == 'ROLE_USER'}" class="badge bg-primary">User</span>
+                                        </td>
+                                        <td>
+                                            <span th:if="${user.enabled}" class="badge bg-success">Active</span>
+                                            <span th:unless="${user.enabled}" class="badge bg-danger">Inactive</span>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="btn btn-sm btn-info">View Expenses</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div th:replace="fragments/layout :: footer"></div>
+    
+    <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html> 

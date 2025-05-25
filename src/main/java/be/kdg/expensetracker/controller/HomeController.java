@@ -11,4 +11,9 @@ public class HomeController {
     public String index() {
         return "index";
     }
+    
+    @GetMapping("/expenses")
+    public String expenses() {
+        return "expenses";
+    }
 }

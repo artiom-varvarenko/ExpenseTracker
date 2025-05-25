@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <body>
 <header th:fragment="header (currentPage)">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
@@ -21,10 +22,39 @@
                            th:classappend="${currentPage == 'expenses' ? 'active' : ''}"
                            th:href="@{/expenses}">Expenses</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link"
                            th:classappend="${currentPage == 'categories' ? 'active' : ''}"
                            th:href="@{/categories}">Categories</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link"
+                           th:classappend="${currentPage == 'admin' ? 'active' : ''}"
+                           th:href="@{/admin}">Admin Dashboard</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('MANAGER')">
+                        <a class="nav-link"
+                           th:classappend="${currentPage == 'reports' ? 'active' : ''}"
+                           th:href="@{/reports}">Reports</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <span class="navbar-text me-3">
+                            Welcome, <span sec:authentication="name"></span>!
+                            <span class="badge bg-info" sec:authentication="principal.authorities">[ROLE]</span>
+                        </span>
+                    </li>
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
+                        <a class="nav-link" th:href="@{/login}">Login</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
+                        <a class="nav-link" th:href="@{/register}">Register</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" method="post">
+                            <button class="btn btn-link nav-link" type="submit">Logout</button>
+                        </form>
                     </li>
                 </ul>
             </div>

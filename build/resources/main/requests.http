@@ -1,0 +1,94 @@
+### Get all expenses
+GET http://localhost:8080/api/expenses
+Accept: application/json
+
+### Get expense by ID - Success (200 OK)
+GET http://localhost:8080/api/expenses/1
+Accept: application/json
+
+### Get expense by ID - Not Found (404)
+GET http://localhost:8080/api/expenses/999
+Accept: application/json
+
+### Get expenses by user ID - Success (200 OK)
+GET http://localhost:8080/api/expenses/user/1
+Accept: application/json
+
+### Get expenses by user ID - Not Found (404)
+GET http://localhost:8080/api/expenses/user/999
+Accept: application/json
+
+### Create expense - Success (201 Created)
+POST http://localhost:8080/api/expenses
+Content-Type: application/json
+Accept: application/json
+
+{
+  "description": "New Laptop",
+  "amount": 1299.99,
+  "date": "2023-05-15",
+  "userId": 1,
+  "categoryIds": [1, 2]
+}
+
+### Create expense - Bad Request (400) - Missing required field
+POST http://localhost:8080/api/expenses
+Content-Type: application/json
+Accept: application/json
+
+{
+  "description": "New Laptop",
+  "amount": 1299.99,
+  "date": "2023-05-15"
+  // Missing userId
+}
+
+### Create expense - Bad Request (400) - Invalid data
+POST http://localhost:8080/api/expenses
+Content-Type: application/json
+Accept: application/json
+
+{
+  "description": "AB", // Too short
+  "amount": -1299.99, // Negative amount
+  "date": "2030-01-01", // Future date
+  "userId": 1
+}
+
+### Update expense - Success (200 OK)
+PATCH http://localhost:8080/api/expenses/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "description": "Updated Description",
+  "amount": 150.00
+}
+
+### Update expense - Not Found (404)
+PATCH http://localhost:8080/api/expenses/999
+Content-Type: application/json
+Accept: application/json
+
+{
+  "description": "Updated Description"
+}
+
+### Update expense - Bad Request (400) - Invalid data
+PATCH http://localhost:8080/api/expenses/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "description": "A", // Too short
+  "amount": -10.00 // Negative amount
+}
+
+### Delete expense - Success (204 No Content)
+DELETE http://localhost:8080/api/expenses/1
+Accept: application/json
+
+### Delete expense - Error (500 Internal Server Error)
+# This would happen if there are constraints preventing deletion
+DELETE http://localhost:8080/api/expenses/999
+Accept: application/json 

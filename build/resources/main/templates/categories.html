@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories - Expense Tracker</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <div th:replace="fragments/layout :: header('categories')"></div>
+    
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Categories</h1>
+            <p class="lead">This is a protected page that only logged-in users can access.</p>
+            <hr class="my-4">
+            <p sec:authorize="isAuthenticated()">
+                You are logged in as <strong><span sec:authentication="name"></span></strong>. 
+                You can manage your expense categories here.
+            </p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info">
+                    This page demonstrates a protected resource that requires authentication.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div th:replace="fragments/layout :: footer"></div>
+    
+    <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html> 

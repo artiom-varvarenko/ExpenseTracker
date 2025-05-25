@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <th:block th:insert="~{fragments/heading :: heading(title='Expenses')}"></th:block>
+</head>
+<body>
+<th:block th:insert="~{fragments/layout :: header(currentPage = 'expenses')}"></th:block>
+<main class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>All Expenses</h2>
+            <div id="expenses-container" class="mb-4">
+                <p>Loading expenses...</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="expense-details">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Expense Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Select an expense to view details.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="row mt-4">
+        <div class="col-md-8">
+            <h2>User Expenses</h2>
+            
+            <!-- Content for authenticated users -->
+            <div sec:authorize="isAuthenticated()" class="mb-4">
+                <div class="alert alert-success">
+                    <h4>Your Expenses</h4>
+                    <p>Welcome, <span sec:authentication="name"></span>! Here are your personal expenses.</p>
+                    <div id="personal-expenses-container">
+                        <p>Loading your personal expenses...</p>
+                    </div>
+                    <button id="add-expense-btn" class="btn btn-primary mt-3">Add New Expense</button>
+                </div>
+                
+                <!-- Admin/Manager specific content -->
+                <div sec:authorize="hasAnyRole('ADMIN', 'MANAGER')" class="alert alert-warning mt-3">
+                    <h4>Administrative Functions</h4>
+                    <p>As an <span sec:authorize="hasRole('ADMIN')">administrator</span><span sec:authorize="hasRole('MANAGER') and !hasRole('ADMIN')">manager</span>, you have additional capabilities:</p>
+                    <div class="d-flex gap-2">
+                        <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin}" class="btn btn-danger">Admin Dashboard</a>
+                        <a sec:authorize="hasAnyRole('ADMIN', 'MANAGER')" th:href="@{/reports}" class="btn btn-warning">Reports Dashboard</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content for all users -->
+            <div class="form-group mb-3">
+                <label for="user-selector">Select User:</label>
+                <select id="user-selector" class="form-control">
+                    <option value="">-- Select User --</option>
+                    <option value="1">User 1</option>
+                    <option value="2">User 2</option>
+                    <option value="3">User 3</option>
+                </select>
+            </div>
+            <div id="user-expenses-container">
+                <p>Please select a user to view their expenses.</p>
+            </div>
+            
+            <!-- Extra information for anonymous users -->
+            <div sec:authorize="!isAuthenticated()" class="mt-4">
+                <div class="alert alert-info">
+                    <h4>Want to track your own expenses?</h4>
+                    <p>Sign in or create an account to track and manage your personal expenses.</p>
+                    <div class="mt-2">
+                        <a th:href="@{/login}" class="btn btn-primary me-2">Sign In</a>
+                        <a th:href="@{/register}" class="btn btn-outline-primary">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<th:block th:insert="~{fragments/layout :: footer}"></th:block>
+<script th:src="@{/js/expenses.js}"></script>
+</body>
+</html> 

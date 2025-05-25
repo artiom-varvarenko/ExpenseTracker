@@ -1,5 +1,16 @@
 package be.kdg.expensetracker.service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+
 import be.kdg.expensetracker.domain.Category;
 import be.kdg.expensetracker.domain.Expense;
 import be.kdg.expensetracker.domain.ExpenseCategory;
@@ -9,11 +20,6 @@ import be.kdg.expensetracker.repository.ExpenseCategoryRepository;
 import be.kdg.expensetracker.repository.ExpenseRepository;
 import be.kdg.expensetracker.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
 
 @Service
 @Transactional
@@ -47,6 +53,14 @@ public class ExpenseService {
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
         return expenseRepository.findByUser(user);
     }
+    
+    public List<Expense> getExpensesByUserId(int userId) {
+        return expenseRepository.findByUserId(userId);
+    }
+    
+    public List<Expense> getExpensesByUser(User user) {
+        return expenseRepository.findByUser(user);
+    }
 
     public Expense addExpense(String description, BigDecimal amount, LocalDate date, int userId) {
         User user = userRepository.findById(userId)
@@ -54,6 +68,35 @@ public class ExpenseService {
 
         Expense expense = new Expense(description, amount, date, user);
         return expenseRepository.save(expense);
+    }
+    
+    public Expense createExpense(String description, BigDecimal amount, LocalDate date, User user) {
+        // Only authenticated users can create expenses
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new AccessDeniedException("You must be logged in to create an expense");
+        }
+        
+        Expense expense = new Expense(description, amount, date, user);
+        return expenseRepository.save(expense);
+    }
+    
+    public Expense addExpenseWithCategories(String description, BigDecimal amount, LocalDate date, int userId, List<Integer> categoryIds) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+
+        Expense expense = new Expense(description, amount, date, user);
+        expense = expenseRepository.save(expense);
+        
+        if (categoryIds != null && !categoryIds.isEmpty()) {
+            for (Integer categoryId : categoryIds) {
+                addCategoryToExpense(expense.getId(), categoryId);
+            }
+            // Refresh the expense to include the categories
+            expense = expenseRepository.findExpenseWithCategories(expense.getId()).orElse(expense);
+        }
+        
+        return expense;
     }
 
     public void addCategoryToExpense(int expenseId, int categoryId) {
@@ -68,8 +111,119 @@ public class ExpenseService {
             expenseCategoryRepository.save(expenseCategory);
         }
     }
+    
+    public Expense updateExpense(int id, String description, BigDecimal amount, LocalDate date) {
+        Expense expense = expenseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
+        
+        // Check if the current user has permission to update this expense
+        if (!canUserModifyExpense(expense)) {
+            throw new AccessDeniedException("You don't have permission to update this expense");
+        }
+        
+        if (description != null) {
+            expense.setDescription(description);
+        }
+        
+        if (amount != null) {
+            expense.setAmount(amount);
+        }
+        
+        if (date != null) {
+            expense.setDate(date);
+        }
+        
+        return expenseRepository.save(expense);
+    }
+    
+    public Expense updateExpense(int id, String description, BigDecimal amount, LocalDate date, List<Integer> categoryIds) {
+        Expense expense = expenseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
+        
+        // Check if the current user has permission to update this expense
+        if (!canUserModifyExpense(expense)) {
+            throw new AccessDeniedException("You don't have permission to update this expense");
+        }
+        
+        if (description != null) {
+            expense.setDescription(description);
+        }
+        
+        if (amount != null) {
+            expense.setAmount(amount);
+        }
+        
+        if (date != null) {
+            expense.setDate(date);
+        }
+        
+        expense = expenseRepository.save(expense);
+        
+        // Update categories if provided
+        if (categoryIds != null) {
+            // Remove existing categories
+            if (expense.getExpenseCategories() != null) {
+                List<ExpenseCategory> toRemove = new ArrayList<>(expense.getExpenseCategories());
+                for (ExpenseCategory ec : toRemove) {
+                    expenseCategoryRepository.delete(ec);
+                }
+            }
+            
+            // Add new categories
+            for (Integer categoryId : categoryIds) {
+                addCategoryToExpense(expense.getId(), categoryId);
+            }
+            
+            // Refresh the expense to include the updated categories
+            expense = expenseRepository.findExpenseWithCategories(expense.getId()).orElse(expense);
+        }
+        
+        return expense;
+    }
 
     public void removeExpense(int id) {
         expenseRepository.deleteById(id);
+    }
+    
+    public void deleteExpense(int id) {
+        Expense expense = expenseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
+        
+        // Check if the current user has permission to delete this expense
+        if (!canUserModifyExpense(expense)) {
+            throw new AccessDeniedException("You don't have permission to delete this expense");
+        }
+        
+        expenseRepository.delete(expense);
+    }
+
+    /**
+     * Checks if the current user can modify the given expense.
+     * Rules:
+     * 1. The user is the owner of the expense
+     * 2. OR the user has ADMIN role
+     * 
+     * @param expense The expense to check
+     * @return true if the user can modify the expense, false otherwise
+     */
+    private boolean canUserModifyExpense(Expense expense) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        
+        // If not authenticated, no access
+        if (auth == null || !auth.isAuthenticated()) {
+            return false;
+        }
+        
+        // Admin can modify any expense
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            return true;
+        }
+        
+        // User can modify their own expenses
+        if (auth.getName().equals(expense.getUser().getEmail())) {
+            return true;
+        }
+        
+        return false;
     }
 }
