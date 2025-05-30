@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="be.kdg.expensetracker.ExpenseTrackerApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-05-29T12:36:00" hostname="WIN-8VD49MJ8CQH" time="0.374">
+  <properties/>
+  <testcase name="contextLoads()" classname="be.kdg.expensetracker.ExpenseTrackerApplicationTests" time="0.374"/>
+  <system-out><![CDATA[14:35:55.698 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [be.kdg.expensetracker.ExpenseTrackerApplicationTests]: ExpenseTrackerApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:35:55.777 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration be.kdg.expensetracker.ExpenseTrackerApplication for test class be.kdg.expensetracker.ExpenseTrackerApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.3)
+
+2025-05-29T14:35:56.111+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] b.k.e.ExpenseTrackerApplicationTests     : Starting ExpenseTrackerApplicationTests using Java 21.0.4 with PID 35320 (started by user in C:\Users\user\Desktop\spring-backend)
+2025-05-29T14:35:56.111+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] b.k.e.ExpenseTrackerApplicationTests     : The following 1 profile is active: "test"
+2025-05-29T14:35:56.691+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-29T14:35:56.742+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 41 ms. Found 4 JPA repository interfaces.
+2025-05-29T14:35:57.246+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-29T14:35:57.348+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-05-29T14:35:57.390+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-29T14:35:57.616+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-29T14:35:57.650+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-29T14:35:57.787+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2025-05-29T14:35:57.789+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-29T14:35:57.807+02:00  WARN 35320 --- [expensetracker-test] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-29T14:35:58.545+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-29T14:35:58.596+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-29T14:35:58.967+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-05-29T14:35:59.739+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-05-29T14:36:00.288+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-05-29T14:36:00.356+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] b.k.e.ExpenseTrackerApplicationTests     : Started ExpenseTrackerApplicationTests in 4.445 seconds (process running for 5.396)
+Sample users and expenses created.
+]]></system-out>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\user\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.12\be4984cb6fd1ef1d11f218a648889dfda44b8a15\byte-buddy-agent-1.14.12.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>

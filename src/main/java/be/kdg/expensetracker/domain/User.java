@@ -8,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,7 +18,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "users") // users so avoid reserved word
+@Table(name = "users") // users to avoid reserved word
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +32,7 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String password;
-    
+
     @Column(nullable = false)
     private String role = "ROLE_USER"; // Default role
 
@@ -42,8 +41,8 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
 
-    // Using LAZY as per JPA best practices
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // Remove CascadeType.ALL to prevent automatic deletion of expenses when user is deleted
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Expense> expenses;
 
     // Constructors

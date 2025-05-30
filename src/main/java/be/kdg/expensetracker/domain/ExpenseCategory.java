@@ -15,11 +15,11 @@ public class ExpenseCategory {
     private Integer id;
 
     // Using LAZY for JPA best practices
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "expense_id", nullable = false)
     private Expense expense;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 

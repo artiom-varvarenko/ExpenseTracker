@@ -3,6 +3,7 @@ package be.kdg.expensetracker.domain;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,12 +23,13 @@ public class Expense {
     private LocalDate date;
 
     // Using LAZY for JPA best practices
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "expense", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ExpenseCategory> expenseCategories;
+    // Cascade ALL and orphanRemoval to properly handle ExpenseCategory deletion
+    @OneToMany(mappedBy = "expense", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<ExpenseCategory> expenseCategories = new ArrayList<>();
 
     // Constructors
     public Expense() {
@@ -38,6 +40,17 @@ public class Expense {
         this.amount = amount;
         this.date = date;
         this.user = user;
+    }
+
+    // Helper methods for managing bidirectional relationship
+    public void addExpenseCategory(ExpenseCategory expenseCategory) {
+        expenseCategories.add(expenseCategory);
+        expenseCategory.setExpense(this);
+    }
+
+    public void removeExpenseCategory(ExpenseCategory expenseCategory) {
+        expenseCategories.remove(expenseCategory);
+        expenseCategory.setExpense(null);
     }
 
     // Getters and Setters

@@ -1,6 +1,7 @@
 package be.kdg.expensetracker.domain;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,9 +17,9 @@ public class Category {
     @Column
     private String description;
 
-    // Using LAZY for JPA best practices
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ExpenseCategory> expenseCategories;
+    // Using LAZY for JPA best practices - no cascade here as we don't want to delete expenses when category is deleted
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    private List<ExpenseCategory> expenseCategories = new ArrayList<>();
 
     // Constructors
     public Category() {

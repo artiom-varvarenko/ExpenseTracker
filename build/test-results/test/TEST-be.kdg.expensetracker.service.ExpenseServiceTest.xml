@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="be.kdg.expensetracker.service.ExpenseServiceTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-05-29T12:36:04" hostname="WIN-8VD49MJ8CQH" time="1.719">
+  <properties/>
+  <testcase name="testUpdateExpense_NonExistentExpense_ShouldThrowException()" classname="be.kdg.expensetracker.service.ExpenseServiceTest" time="0.171"/>
+  <testcase name="testAddExpenseWithCategories_InvalidCategoryId_ShouldThrowException()" classname="be.kdg.expensetracker.service.ExpenseServiceTest" time="0.174"/>
+  <testcase name="testDeleteExpense_ByOwner_ShouldSucceed()" classname="be.kdg.expensetracker.service.ExpenseServiceTest" time="0.178"/>
+  <testcase name="testUpdateExpense_ByNonOwner_ShouldThrowAccessDeniedException()" classname="be.kdg.expensetracker.service.ExpenseServiceTest" time="0.167"/>
+  <testcase name="testDeleteExpense_WithoutAuthentication_ShouldThrowAccessDeniedException()" classname="be.kdg.expensetracker.service.ExpenseServiceTest" time="0.174"/>
+  <testcase name="testDeleteExpense_ByNonOwner_ShouldThrowAccessDeniedException()" classname="be.kdg.expensetracker.service.ExpenseServiceTest" time="0.178"/>
+  <testcase name="testUpdateExpense_ByAdmin_ShouldSucceed()" classname="be.kdg.expensetracker.service.ExpenseServiceTest" time="0.169"/>
+  <testcase name="testAddExpenseWithCategories_Success()" classname="be.kdg.expensetracker.service.ExpenseServiceTest" time="0.17"/>
+  <testcase name="testUpdateExpense_ByOwner_ShouldSucceed()" classname="be.kdg.expensetracker.service.ExpenseServiceTest" time="0.169"/>
+  <testcase name="testAddExpenseWithCategories_UserNotFound_ShouldThrowException()" classname="be.kdg.expensetracker.service.ExpenseServiceTest" time="0.164"/>
+  <system-out><![CDATA[2025-05-29T14:36:04.347+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [be.kdg.expensetracker.service.ExpenseServiceTest]: ExpenseServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-05-29T14:36:04.348+02:00  INFO 35320 --- [expensetracker-test] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration be.kdg.expensetracker.ExpenseTrackerApplication for test class be.kdg.expensetracker.service.ExpenseServiceTest
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
