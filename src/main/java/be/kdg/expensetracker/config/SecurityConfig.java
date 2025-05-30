@@ -9,6 +9,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -18,37 +23,49 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**")) // Enable CSRF with exception for API endpoints
-            .authorizeHttpRequests(authorize -> authorize
-                // Public access
-                .requestMatchers("/", "/login", "/register", "/css/**", "/js/**", "/webjars/**", "/h2-console/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/expenses").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/expenses").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/expenses/**").permitAll()
-                
-                // Role-specific access
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/reports/**").hasAnyRole("ADMIN", "MANAGER")
-                .requestMatchers("/categories").authenticated()
-                .requestMatchers(HttpMethod.POST, "/api/expenses").authenticated()
-                .requestMatchers(HttpMethod.PATCH, "/api/expenses/**").authenticated()
-                .requestMatchers(HttpMethod.DELETE, "/api/expenses/**").authenticated()
-                
-                // Fallback
-                .anyRequest().permitAll()
-            )
-            .formLogin(form -> form
-                .loginPage("/login")
-                .defaultSuccessUrl("/", true)
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .logoutSuccessUrl("/")
-                .permitAll()
-            )
-            // Allow frames for h2-console
-            .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
-            
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
+                .authorizeHttpRequests(authorize -> authorize
+                        // Public access
+                        .requestMatchers("/", "/login", "/register", "/css/**", "/js/**", "/webjars/**", "/h2-console/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/expenses").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/expenses").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/expenses/**").permitAll()
+
+                        // Role-specific access
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/reports/**").hasAnyRole("ADMIN", "MANAGER")
+                        .requestMatchers("/categories").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/expenses").authenticated()
+                        .requestMatchers(HttpMethod.PATCH, "/api/expenses/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/expenses/**").authenticated()
+
+                        // Fallback
+                        .anyRequest().permitAll()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/", true)
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/")
+                        .permitAll()
+                )
+                // Different handling for API vs MVC endpoints
+                .exceptionHandling(exceptions -> exceptions
+                        .defaultAuthenticationEntryPointFor(
+                                new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
+                                new AntPathRequestMatcher("/api/**")
+                        )
+                        // This will redirect to login for non-API endpoints
+                        .defaultAuthenticationEntryPointFor(
+                                new LoginUrlAuthenticationEntryPoint("/login"),
+                                new NegatedRequestMatcher(new AntPathRequestMatcher("/api/**"))
+                        )
+                )
+                // Allow frames for h2-console
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
+
         return http.build();
     }
     

@@ -61,6 +61,10 @@ public class ExpenseService {
     }
 
     public List<Expense> getExpensesByUserId(int userId) {
+        // Return empty list if user doesn't exist instead of throwing exception
+        if (!userRepository.existsById(userId)) {
+            return new ArrayList<>();
+        }
         return expenseRepository.findByUserId(userId);
     }
 

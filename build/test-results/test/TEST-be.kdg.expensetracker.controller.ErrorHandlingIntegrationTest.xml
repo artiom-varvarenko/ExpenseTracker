@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="be.kdg.expensetracker.controller.ErrorHandlingIntegrationTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-05-30T08:18:54" hostname="WIN-8VD49MJ8CQH" time="0.409">
+  <properties/>
+  <testcase name="apiEndpoint_NonExistentResource_ShouldReturn404Json()" classname="be.kdg.expensetracker.controller.ErrorHandlingIntegrationTest" time="0.227"/>
+  <testcase name="nonExistentPage_ShouldReturn404()" classname="be.kdg.expensetracker.controller.ErrorHandlingIntegrationTest" time="0.181"/>
+  <system-out><![CDATA[2025-05-30T10:18:54.208+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [be.kdg.expensetracker.controller.ErrorHandlingIntegrationTest]: ErrorHandlingIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-05-30T10:18:54.210+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration be.kdg.expensetracker.ExpenseTrackerApplication for test class be.kdg.expensetracker.controller.ErrorHandlingIntegrationTest
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
