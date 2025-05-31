@@ -14,6 +14,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -23,6 +28,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // Enable CORS with our configuration
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                // Configure CSRF - disable for all API endpoints to fix test issues
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
                 .authorizeHttpRequests(authorize -> authorize
                         // Public access
@@ -30,6 +38,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/expenses").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/expenses").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/expenses/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/expenses/search").permitAll()
+                        // Public endpoint for testing with Client - permitAll is used to test the Client
+                        .requestMatchers(HttpMethod.POST, "/api/expenses/public").permitAll()
 
                         // Role-specific access
                         .requestMatchers("/admin/**").hasRole("ADMIN")
@@ -68,9 +79,23 @@ public class SecurityConfig {
 
         return http.build();
     }
-    
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        // Only allow the origin that corresponds to the Client application
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:9000"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/api/**", configuration);
+        return source;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-} 
+}

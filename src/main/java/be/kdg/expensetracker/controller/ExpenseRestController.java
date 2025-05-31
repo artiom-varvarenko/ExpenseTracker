@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,8 +44,8 @@ public class ExpenseRestController {
     private final UserRepository userRepository;
     private final ExpenseMapper expenseMapper;
 
-    public ExpenseRestController(ExpenseRepository expenseRepository, ExpenseService expenseService, 
-                                UserRepository userRepository, ExpenseMapper expenseMapper) {
+    public ExpenseRestController(ExpenseRepository expenseRepository, ExpenseService expenseService,
+                                 UserRepository userRepository, ExpenseMapper expenseMapper) {
         this.expenseRepository = expenseRepository;
         this.expenseService = expenseService;
         this.userRepository = userRepository;
@@ -81,13 +82,25 @@ public class ExpenseRestController {
         }
     }
 
+    // New search endpoint
+    @GetMapping("/search")
+    public ResponseEntity<List<ExpenseDto>> searchExpenses(@RequestParam(required = false) String description,
+                                                           @RequestParam(required = false) String minAmount,
+                                                           @RequestParam(required = false) String maxAmount) {
+        List<Expense> expenses = expenseService.searchExpenses(description, minAmount, maxAmount);
+        List<ExpenseDto> dtos = expenses.stream()
+                .map(expenseMapper::toDto)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
+    }
+
     @PostMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ExpenseDto> createExpense(@Valid @RequestBody ExpensePostDto expensePostDto) {
         // Get the currently authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserEmail = authentication.getName();
-        
+
         // Find user by email
         return userRepository.findByEmail(currentUserEmail)
                 .map(user -> {
@@ -103,6 +116,30 @@ public class ExpenseRestController {
                             .body(expenseMapper.toDto(expense));
                 })
                 .orElse(ResponseEntity.badRequest().build());
+    }
+
+    // New public endpoint for testing with the Client - permitAll is used to test the Client
+    @PostMapping("/public")
+    public ResponseEntity<ExpenseDto> createExpensePublic(@Valid @RequestBody ExpensePostDto expensePostDto) {
+        // For testing purposes, we'll use a default user or the first user in the database
+        User defaultUser = userRepository.findById(1)
+                .orElseGet(() -> {
+                    // Create a test user if none exists
+                    User testUser = new User("client-test@expenses.com", "Client Test User", "test123");
+                    testUser.setRole("ROLE_USER");
+                    return userRepository.save(testUser);
+                });
+
+        Expense expense = expenseService.createExpense(
+                expensePostDto.getDescription(),
+                expensePostDto.getAmount(),
+                expensePostDto.getDate(),
+                defaultUser
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(expenseMapper.toDto(expense));
     }
 
     @PatchMapping("/{id}")
@@ -131,7 +168,7 @@ public class ExpenseRestController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
-    
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -143,4 +180,4 @@ public class ExpenseRestController {
         });
         return errors;
     }
-} 
+}

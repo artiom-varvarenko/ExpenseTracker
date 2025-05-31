@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - CategoryControllerIntegrationTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>CategoryControllerIntegrationTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/be.kdg.expensetracker.controller.html">be.kdg.expensetracker.controller</a> &gt; CategoryControllerIntegrationTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">2</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.364s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">categoriesPage_AuthenticatedUser_ShouldShowPage()</td>
+<td class="success">0.188s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">categoriesPage_WithoutAuthentication_ShouldRedirectToLogin()</td>
+<td class="success">0.176s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2025-06-01T00:21:00.027+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [CategoryControllerIntegrationTest]: using SpringBootContextLoader
+2025-06-01T00:21:00.027+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [be.kdg.expensetracker.controller.CategoryControllerIntegrationTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2025-06-01T00:21:00.027+02:00  INFO 8036 --- [expensetracker-test] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [be.kdg.expensetracker.controller.CategoryControllerIntegrationTest]: CategoryControllerIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-06-01T00:21:00.027+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using ContextCustomizerFactory implementations for test class [CategoryControllerIntegrationTest]: [OverrideAutoConfigurationContextCustomizerFactory, ObservabilityContextCustomizerFactory, TypeExcludeFiltersContextCustomizerFactory, PropertyMappingContextCustomizerFactory, WebDriverContextCustomizerFactory, ImportsContextCustomizerFactory, ExcludeFilterContextCustomizerFactory, HttpGraphQlTesterContextCustomizerFactory, DuplicateJsonObjectContextCustomizerFactory, MockitoContextCustomizerFactory, TestRestTemplateContextCustomizerFactory, WebTestClientContextCustomizerFactory, MockServerContainerContextCustomizerFactory, DynamicPropertiesContextCustomizerFactory]
+2025-06-01T00:21:00.028+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using ContextCustomizers for test class [CategoryControllerIntegrationTest]: [DisableObservabilityContextCustomizer, PropertyMappingContextCustomizer, WebDriverContextCustomizer, ImportsContextCustomizer, ExcludeFilterContextCustomizer, DuplicateJsonObjectContextCustomizer, MockitoContextCustomizer, TestRestTemplateContextCustomizer]
+2025-06-01T00:21:00.029+02:00  INFO 8036 --- [expensetracker-test] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration be.kdg.expensetracker.ExpenseTrackerApplication for test class be.kdg.expensetracker.controller.CategoryControllerIntegrationTest
+2025-06-01T00:21:00.030+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .s.t.c.u.TestContextSpringFactoriesUtils : Skipping candidate TestExecutionListener [org.springframework.test.context.observation.MicrometerObservationRegistryTestExecutionListener] due to a missing dependency. Specify custom TestExecutionListener classes or make the default TestExecutionListener classes and their required dependencies available. Offending class: io.micrometer.context.ThreadLocalAccessor. MicrometerObservationRegistryTestExecutionListener requires io.micrometer:micrometer-observation:1.10.8 or higher and io.micrometer:context-propagation:1.0.3 or higher.
+2025-06-01T00:21:00.030+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners for test class [CategoryControllerIntegrationTest]: [ServletTestExecutionListener, DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, MockitoTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, TransactionalTestExecutionListener, SqlScriptsTestExecutionListener, WithSecurityContextTestExecutionListener, EventPublishingTestExecutionListener, ReactorContextTestExecutionListener, RestDocsTestExecutionListener, MockRestServiceServerResetTestExecutionListener, MockMvcPrintOnlyOnFailureTestExecutionListener, WebDriverTestExecutionListener, MockWebServiceServerTestExecutionListener, ResetMocksTestExecutionListener]
+2025-06-01T00:21:00.030+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] sContextBeforeModesTestExecutionListener : Before test class: class [CategoryControllerIntegrationTest], class annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:00.030+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 148, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.030+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 149, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.030+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.c.w.ServletTestExecutionListener   : Setting up MockHttpServletRequest, MockHttpServletResponse, ServletWebRequest, and RequestContextHolder for test class be.kdg.expensetracker.controller.CategoryControllerIntegrationTest
+2025-06-01T00:21:00.030+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] DependencyInjectionTestExecutionListener : Performing dependency injection for test class be.kdg.expensetracker.controller.CategoryControllerIntegrationTest
+2025-06-01T00:21:00.030+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 150, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.031+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 151, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.031+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] sContextBeforeModesTestExecutionListener : Before test method: class [CategoryControllerIntegrationTest], method [categoriesPage_WithoutAuthentication_ShouldRedirectToLogin], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:00.031+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] t.c.t.TransactionalTestExecutionListener : Explicit transaction definition [PROPAGATION_REQUIRED,ISOLATION_DEFAULT] found for test class [be.kdg.expensetracker.controller.CategoryControllerIntegrationTest] and test method [categoriesPage_WithoutAuthentication_ShouldRedirectToLogin]
+2025-06-01T00:21:00.031+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 152, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.031+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] t.c.t.TransactionalTestExecutionListener : No method-level @Rollback override: using default rollback [true] for test method [void be.kdg.expensetracker.controller.CategoryControllerIntegrationTest.categoriesPage_WithoutAuthentication_ShouldRedirectToLogin() throws java.lang.Exception]
+2025-06-01T00:21:00.032+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test class [be.kdg.expensetracker.controller.CategoryControllerIntegrationTest]; test method [categoriesPage_WithoutAuthentication_ShouldRedirectToLogin]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@3918a9f9]; rollback [true]
+2025-06-01T00:21:00.032+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 153, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.032+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 154, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.202+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 155, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.204+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 156, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.204+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 157, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.205+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 158, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.205+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 159, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.205+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 160, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.206+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 161, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.206+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 162, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.206+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction (1) for test class [be.kdg.expensetracker.controller.CategoryControllerIntegrationTest]; test method [categoriesPage_WithoutAuthentication_ShouldRedirectToLogin]
+2025-06-01T00:21:00.206+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .c.s.DirtiesContextTestExecutionListener : After test method: class [CategoryControllerIntegrationTest], method [categoriesPage_WithoutAuthentication_ShouldRedirectToLogin], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:00.206+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.c.w.ServletTestExecutionListener   : Resetting RequestContextHolder for test class be.kdg.expensetracker.controller.CategoryControllerIntegrationTest
+2025-06-01T00:21:00.207+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 163, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.207+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.c.w.ServletTestExecutionListener   : Setting up MockHttpServletRequest, MockHttpServletResponse, ServletWebRequest, and RequestContextHolder for test class be.kdg.expensetracker.controller.CategoryControllerIntegrationTest
+2025-06-01T00:21:00.207+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] DependencyInjectionTestExecutionListener : Performing dependency injection for test class be.kdg.expensetracker.controller.CategoryControllerIntegrationTest
+2025-06-01T00:21:00.207+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 164, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.207+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 165, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.208+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] sContextBeforeModesTestExecutionListener : Before test method: class [CategoryControllerIntegrationTest], method [categoriesPage_AuthenticatedUser_ShouldShowPage], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:00.208+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] t.c.t.TransactionalTestExecutionListener : Explicit transaction definition [PROPAGATION_REQUIRED,ISOLATION_DEFAULT] found for test class [be.kdg.expensetracker.controller.CategoryControllerIntegrationTest] and test method [categoriesPage_AuthenticatedUser_ShouldShowPage]
+2025-06-01T00:21:00.208+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 166, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.208+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] t.c.t.TransactionalTestExecutionListener : No method-level @Rollback override: using default rollback [true] for test method [void be.kdg.expensetracker.controller.CategoryControllerIntegrationTest.categoriesPage_AuthenticatedUser_ShouldShowPage() throws java.lang.Exception]
+2025-06-01T00:21:00.208+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test class [be.kdg.expensetracker.controller.CategoryControllerIntegrationTest]; test method [categoriesPage_AuthenticatedUser_ShouldShowPage]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@3918a9f9]; rollback [true]
+2025-06-01T00:21:00.208+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 167, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.208+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 168, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.208+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 169, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.209+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 170, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.382+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 171, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.382+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@12917a56}
+2025-06-01T00:21:00.382+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@12917a56}
+2025-06-01T00:21:00.382+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'securityContextRepository' from target object [org.springframework.security.web.context.SecurityContextHolderFilter@4d6c42e] or target class [class org.springframework.security.web.context.SecurityContextHolderFilter]
+2025-06-01T00:21:00.383+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : GET &quot;/categories&quot;, parameters={}
+2025-06-01T00:21:00.385+02:00  WARN 8036 --- [expensetracker-test] [    Test worker] actStandardFragmentInsertionTagProcessor : [THYMELEAF][Test worker][categories] Deprecated unwrapped fragment expression &quot;fragments/layout :: header('categories')&quot; found in template categories, line 10, col 10. Please use the complete syntax of fragment expressions instead (&quot;~{fragments/layout :: header('categories')}&quot;). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-06-01T00:21:00.390+02:00  WARN 8036 --- [expensetracker-test] [    Test worker] actStandardFragmentInsertionTagProcessor : [THYMELEAF][Test worker][categories] Deprecated unwrapped fragment expression &quot;fragments/layout :: footer&quot; found in template categories, line 32, col 10. Please use the complete syntax of fragment expressions instead (&quot;~{fragments/layout :: footer}&quot;). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-06-01T00:21:00.392+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed 200 OK
+2025-06-01T00:21:00.393+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 172, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.393+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 173, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.393+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 174, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.394+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 175, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.394+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 176, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.394+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 177, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.394+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 178, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.395+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction (1) for test class [be.kdg.expensetracker.controller.CategoryControllerIntegrationTest]; test method [categoriesPage_AuthenticatedUser_ShouldShowPage]
+2025-06-01T00:21:00.395+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .c.s.DirtiesContextTestExecutionListener : After test method: class [CategoryControllerIntegrationTest], method [categoriesPage_AuthenticatedUser_ShouldShowPage], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:00.395+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.c.w.ServletTestExecutionListener   : Resetting RequestContextHolder for test class be.kdg.expensetracker.controller.CategoryControllerIntegrationTest
+2025-06-01T00:21:00.395+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 179, missCount = 2, failureCount = 0]
+2025-06-01T00:21:00.395+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .c.s.DirtiesContextTestExecutionListener : After test class: class [CategoryControllerIntegrationTest], class annotated with @DirtiesContext [false] with mode [null]
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.10</a> at Jun 1, 2025, 12:21:12 AM</p>
+</div>
+</div>
+</body>
+</html>

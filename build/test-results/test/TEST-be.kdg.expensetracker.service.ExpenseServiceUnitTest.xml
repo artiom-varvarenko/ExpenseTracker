@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="be.kdg.expensetracker.service.ExpenseServiceUnitTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-05-31T22:21:11" hostname="WIN-8VD49MJ8CQH" time="0.125">
+  <properties/>
+  <testcase name="addExpenseWithCategories_CategoryNotFound_ShouldThrowException()" classname="be.kdg.expensetracker.service.ExpenseServiceUnitTest" time="0.065"/>
+  <testcase name="updateExpense_AsOwner_ShouldUpdateSuccessfully()" classname="be.kdg.expensetracker.service.ExpenseServiceUnitTest" time="0.044"/>
+  <testcase name="addExpenseWithCategories_UserNotFound_ShouldThrowException()" classname="be.kdg.expensetracker.service.ExpenseServiceUnitTest" time="0.003"/>
+  <testcase name="addExpenseWithCategories_ValidData_ShouldCreateExpenseWithCategories()" classname="be.kdg.expensetracker.service.ExpenseServiceUnitTest" time="0.005"/>
+  <testcase name="updateExpense_AsNonOwner_ShouldThrowAccessDeniedException()" classname="be.kdg.expensetracker.service.ExpenseServiceUnitTest" time="0.002"/>
+  <testcase name="deleteExpense_WithCategories_ShouldDeleteExpenseOnly()" classname="be.kdg.expensetracker.service.ExpenseServiceUnitTest" time="0.001"/>
+  <testcase name="updateExpense_AsAdmin_ShouldUpdateSuccessfully()" classname="be.kdg.expensetracker.service.ExpenseServiceUnitTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

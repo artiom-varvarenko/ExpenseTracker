@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2025-05-31T22:21:04" hostname="WIN-8VD49MJ8CQH" time="0.276">
+  <properties/>
+  <testcase name="updateExpense_ValidData_ShouldReturn200()" classname="be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest" time="0.163"/>
+  <testcase name="updateExpense_AccessDenied_ShouldReturn403()" classname="be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest" time="0.018"/>
+  <testcase name="createExpense_Unauthenticated_ShouldReturn403()" classname="be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest" time="0.007"/>
+  <testcase name="deleteExpense_ValidId_ShouldReturn204()" classname="be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest" time="0.015"/>
+  <testcase name="deleteExpense_AccessDenied_ShouldReturn403()" classname="be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest" time="0.01"/>
+  <testcase name="createExpense_UnauthenticatedWithCSRF_ShouldReturn401()" classname="be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest" time="0.008"/>
+  <testcase name="createExpense_InvalidData_ShouldReturn400()" classname="be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest" time="0.018"/>
+  <testcase name="createExpense_UserNotFound_ShouldReturn400()" classname="be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest" time="0.008"/>
+  <testcase name="createExpense_ValidData_ShouldReturn201()" classname="be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest" time="0.01"/>
+  <system-out><![CDATA[2025-06-01T00:21:03.532+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [ExpenseRestControllerUnitTest]: using SpringBootContextLoader
+2025-06-01T00:21:03.532+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2025-06-01T00:21:03.532+02:00  INFO 8036 --- [expensetracker-test] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest]: ExpenseRestControllerUnitTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-06-01T00:21:03.534+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using ContextCustomizerFactory implementations for test class [ExpenseRestControllerUnitTest]: [OverrideAutoConfigurationContextCustomizerFactory, ObservabilityContextCustomizerFactory, TypeExcludeFiltersContextCustomizerFactory, PropertyMappingContextCustomizerFactory, WebDriverContextCustomizerFactory, ImportsContextCustomizerFactory, ExcludeFilterContextCustomizerFactory, HttpGraphQlTesterContextCustomizerFactory, DuplicateJsonObjectContextCustomizerFactory, MockitoContextCustomizerFactory, TestRestTemplateContextCustomizerFactory, WebTestClientContextCustomizerFactory, MockServerContainerContextCustomizerFactory, DynamicPropertiesContextCustomizerFactory]
+2025-06-01T00:21:03.542+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using ContextCustomizers for test class [ExpenseRestControllerUnitTest]: [DisableAutoConfigurationContextCustomizer, DisableObservabilityContextCustomizer, TypeExcludeFiltersContextCustomizer, PropertyMappingContextCustomizer, WebDriverContextCustomizer, ImportsContextCustomizer, ExcludeFilterContextCustomizer, DuplicateJsonObjectContextCustomizer, MockitoContextCustomizer]
+2025-06-01T00:21:03.543+02:00  INFO 8036 --- [expensetracker-test] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration be.kdg.expensetracker.ExpenseTrackerApplication for test class be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest
+2025-06-01T00:21:03.544+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .s.t.c.u.TestContextSpringFactoriesUtils : Skipping candidate TestExecutionListener [org.springframework.test.context.observation.MicrometerObservationRegistryTestExecutionListener] due to a missing dependency. Specify custom TestExecutionListener classes or make the default TestExecutionListener classes and their required dependencies available. Offending class: io.micrometer.context.ThreadLocalAccessor. MicrometerObservationRegistryTestExecutionListener requires io.micrometer:micrometer-observation:1.10.8 or higher and io.micrometer:context-propagation:1.0.3 or higher.
+2025-06-01T00:21:03.544+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using TestExecutionListeners for test class [ExpenseRestControllerUnitTest]: [ServletTestExecutionListener, DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, MockitoTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, TransactionalTestExecutionListener, SqlScriptsTestExecutionListener, WithSecurityContextTestExecutionListener, EventPublishingTestExecutionListener, ReactorContextTestExecutionListener, RestDocsTestExecutionListener, MockRestServiceServerResetTestExecutionListener, MockMvcPrintOnlyOnFailureTestExecutionListener, WebDriverTestExecutionListener, MockWebServiceServerTestExecutionListener, ResetMocksTestExecutionListener]
+2025-06-01T00:21:03.544+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] sContextBeforeModesTestExecutionListener : Before test class: class [ExpenseRestControllerUnitTest], class annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:03.567+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .s.b.w.s.c.ApplicationServletEnvironment : Activating profiles [test]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.3)
+
+2025-06-01T00:21:03.572+02:00  INFO 8036 --- [expensetracker-test] [    Test worker] b.k.e.c.ExpenseRestControllerUnitTest    : Starting ExpenseRestControllerUnitTest using Java 21.0.4 with PID 8036 (started by user in E:\spring-backend)
+2025-06-01T00:21:03.572+02:00  INFO 8036 --- [expensetracker-test] [    Test worker] b.k.e.c.ExpenseRestControllerUnitTest    : The following 1 profile is active: "test"
+2025-06-01T00:21:03.572+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.boot.SpringApplication               : Loading source class be.kdg.expensetracker.ExpenseTrackerApplication
+2025-06-01T00:21:04.344+02:00  INFO 8036 --- [expensetracker-test] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-06-01T00:21:04.398+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.b.a.AutoConfigurationPackages        : @EnableAutoConfiguration was declared on a class in the package 'be.kdg.expensetracker'. Automatic @Repository and @Entity scanning is enabled.
+2025-06-01T00:21:04.549+02:00  WARN 8036 --- [expensetracker-test] [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 25a234e9-3cb9-49f4-8fcc-b5c45999de4d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-06-01T00:21:04.562+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2025-06-01T00:21:04.562+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: 
+2025-06-01T00:21:04.565+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] s.b.w.s.f.OrderedCharacterEncodingFilter : Filter 'characterEncodingFilter' configured for use
+2025-06-01T00:21:04.565+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.b.w.s.f.OrderedFormContentFilter     : Filter 'formContentFilter' configured for use
+2025-06-01T00:21:04.565+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.b.w.s.f.OrderedRequestContextFilter  : Filter 'requestContextFilter' configured for use
+2025-06-01T00:21:04.565+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .DelegatingFilterProxyRegistrationBean$1 : Filter 'springSecurityFilterChain' configured for use
+2025-06-01T00:21:04.565+02:00  INFO 8036 --- [expensetracker-test] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-06-01T00:21:04.565+02:00  INFO 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-06-01T00:21:04.566+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Detected AcceptHeaderLocaleResolver
+2025-06-01T00:21:04.566+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Detected FixedThemeResolver
+2025-06-01T00:21:04.566+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@9d1788c
+2025-06-01T00:21:04.566+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Detected org.springframework.web.servlet.support.SessionFlashMapManager@32a4284d
+2025-06-01T00:21:04.566+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-06-01T00:21:04.567+02:00  INFO 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2025-06-01T00:21:04.585+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+
+============================
+CONDITIONS EVALUATION REPORT
+============================
+
+
+Positive matches:
+-----------------
+
+   ErrorMvcAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'jakarta.servlet.Servlet', 'org.springframework.web.servlet.DispatcherServlet' (OnClassCondition)
+      - found 'session' scope (OnWebApplicationCondition)
+
+   ErrorMvcAutoConfiguration#basicErrorController matched:
+      - @ConditionalOnMissingBean (types: org.springframework.boot.web.servlet.error.ErrorController; SearchStrategy: current) did not find any beans (OnBeanCondition)
+
+   ErrorMvcAutoConfiguration#errorAttributes matched:
+      - @ConditionalOnMissingBean (types: org.springframework.boot.web.servlet.error.ErrorAttributes; SearchStrategy: current) did not find any beans (OnBeanCondition)
+
+   ErrorMvcAutoConfiguration.WhitelabelErrorViewConfiguration matched:
+      - @ConditionalOnProperty (server.error.whitelabel.enabled) matched (OnPropertyCondition)
+      - ErrorTemplate Missing did not find error template view (ErrorMvcAutoConfiguration.ErrorTemplateMissingCondition)
+
+   ErrorMvcAutoConfiguration.WhitelabelErrorViewConfiguration#beanNameViewResolver matched:
+      - @ConditionalOnMissingBean (types: org.springframework.web.servlet.view.BeanNameViewResolver; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   ErrorMvcAutoConfiguration.WhitelabelErrorViewConfiguration#defaultErrorView matched:
+      - @ConditionalOnMissingBean (names: error; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   HttpEncodingAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.web.filter.CharacterEncodingFilter' (OnClassCondition)
+      - found 'session' scope (OnWebApplicationCondition)
+      - @ConditionalOnProperty (server.servlet.encoding.enabled) matched (OnPropertyCondition)
+
+   HttpEncodingAutoConfiguration#characterEncodingFilter matched:
+      - @ConditionalOnMissingBean (types: org.springframework.web.filter.CharacterEncodingFilter; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   HttpMessageConvertersAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.http.converter.HttpMessageConverter' (OnClassCondition)
+      - NoneNestedConditions 0 matched 1 did not; NestedCondition on HttpMessageConvertersAutoConfiguration.NotReactiveWebApplicationCondition.ReactiveWebApplication did not find reactive web application classes (HttpMessageConvertersAutoConfiguration.NotReactiveWebApplicationCondition)
+
+   HttpMessageConvertersAutoConfiguration#messageConverters matched:
+      - @ConditionalOnMissingBean (types: org.springframework.boot.autoconfigure.http.HttpMessageConverters; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   HttpMessageConvertersAutoConfiguration.StringHttpMessageConverterConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.http.converter.StringHttpMessageConverter' (OnClassCondition)
+
+   HttpMessageConvertersAutoConfiguration.StringHttpMessageConverterConfiguration#stringHttpMessageConverter matched:
+      - @ConditionalOnMissingBean (types: org.springframework.http.converter.StringHttpMessageConverter; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   JacksonAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'com.fasterxml.jackson.databind.ObjectMapper' (OnClassCondition)
+
+   JacksonAutoConfiguration.Jackson2ObjectMapperBuilderCustomizerConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.http.converter.json.Jackson2ObjectMapperBuilder' (OnClassCondition)
+
+   JacksonAutoConfiguration.JacksonObjectMapperBuilderConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.http.converter.json.Jackson2ObjectMapperBuilder' (OnClassCondition)
+
+   JacksonAutoConfiguration.JacksonObjectMapperBuilderConfiguration#jacksonObjectMapperBuilder matched:
+      - @ConditionalOnMissingBean (types: org.springframework.http.converter.json.Jackson2ObjectMapperBuilder; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   JacksonAutoConfiguration.JacksonObjectMapperConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.http.converter.json.Jackson2ObjectMapperBuilder' (OnClassCondition)
+
+   JacksonAutoConfiguration.JacksonObjectMapperConfiguration#jacksonObjectMapper matched:
+      - @ConditionalOnMissingBean (types: com.fasterxml.jackson.databind.ObjectMapper; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   JacksonAutoConfiguration.ParameterNamesModuleConfiguration matched:
+      - @ConditionalOnClass found required class 'com.fasterxml.jackson.module.paramnames.ParameterNamesModule' (OnClassCondition)
+
+   JacksonAutoConfiguration.ParameterNamesModuleConfiguration#parameterNamesModule matched:
+      - @ConditionalOnMissingBean (types: com.fasterxml.jackson.module.paramnames.ParameterNamesModule; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   JacksonHttpMessageConvertersConfiguration.MappingJackson2HttpMessageConverterConfiguration matched:
+      - @ConditionalOnClass found required class 'com.fasterxml.jackson.databind.ObjectMapper' (OnClassCondition)
+      - @ConditionalOnProperty (spring.mvc.converters.preferred-json-mapper=jackson) matched (OnPropertyCondition)
+      - @ConditionalOnBean (types: com.fasterxml.jackson.databind.ObjectMapper; SearchStrategy: all) found bean 'jacksonObjectMapper' (OnBeanCondition)
+
+   JacksonHttpMessageConvertersConfiguration.MappingJackson2HttpMessageConverterConfiguration#mappingJackson2HttpMessageConverter matched:
+      - @ConditionalOnMissingBean (types: org.springframework.http.converter.json.MappingJackson2HttpMessageConverter ignored: org.springframework.hateoas.server.mvc.TypeConstrainedMappingJackson2HttpMessageConverter,org.springframework.data.rest.webmvc.alps.AlpsJsonHttpMessageConverter; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   MockMvcAutoConfiguration matched:
+      - found 'session' scope (OnWebApplicationCondition)
+
+   MockMvcAutoConfiguration#dispatcherServlet matched:
+      - @ConditionalOnMissingBean (types: org.springframework.web.servlet.DispatcherServlet; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   MockMvcAutoConfiguration#dispatcherServletPath matched:
+      - @ConditionalOnMissingBean (types: org.springframework.boot.autoconfigure.web.servlet.DispatcherServletPath; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   MockMvcAutoConfiguration#mockMvc matched:
+      - @ConditionalOnMissingBean (types: org.springframework.test.web.servlet.MockMvc; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   MockMvcAutoConfiguration#mockMvcBuilder matched:
+      - @ConditionalOnMissingBean (types: org.springframework.test.web.servlet.MockMvcBuilder; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   MockMvcSecurityConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors' (OnClassCondition)
+
+   MockMvcSecurityConfiguration#securityMockMvcBuilderCustomizer matched:
+      - @ConditionalOnBean (names: springSecurityFilterChain; SearchStrategy: all) found bean 'springSecurityFilterChain' (OnBeanCondition)
+
+   NoOpCacheConfiguration matched:
+      - Cache org.springframework.boot.autoconfigure.cache.NoOpCacheConfiguration NONE cache type (CacheCondition)
+
+   SecurityAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.security.authentication.DefaultAuthenticationEventPublisher' (OnClassCondition)
+
+   SecurityAutoConfiguration#authenticationEventPublisher matched:
+      - @ConditionalOnMissingBean (types: org.springframework.security.authentication.AuthenticationEventPublisher; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   SecurityFilterAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer', 'org.springframework.security.config.http.SessionCreationPolicy' (OnClassCondition)
+      - found 'session' scope (OnWebApplicationCondition)
+
+   SecurityFilterAutoConfiguration#securityFilterChainRegistration matched:
+      - @ConditionalOnBean (names: springSecurityFilterChain; SearchStrategy: all) found bean 'springSecurityFilterChain' (OnBeanCondition)
+
+   SpringBootWebSecurityConfiguration matched:
+      - found 'session' scope (OnWebApplicationCondition)
+
+   SpringBootWebSecurityConfiguration.SecurityFilterChainConfiguration matched:
+      - AllNestedConditions 2 matched 0 did not; NestedCondition on DefaultWebSecurityCondition.Beans @ConditionalOnMissingBean (types: org.springframework.security.web.SecurityFilterChain; SearchStrategy: all) did not find any beans; NestedCondition on DefaultWebSecurityCondition.Classes @ConditionalOnClass found required classes 'org.springframework.security.web.SecurityFilterChain', 'org.springframework.security.config.annotation.web.builders.HttpSecurity' (DefaultWebSecurityCondition)
+
+   SpringBootWebSecurityConfiguration.WebSecurityEnablerConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.security.config.annotation.web.configuration.EnableWebSecurity' (OnClassCondition)
+      - @ConditionalOnMissingBean (names: springSecurityFilterChain; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   SpringDataWebAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.springframework.data.web.PageableHandlerMethodArgumentResolver', 'org.springframework.web.servlet.config.annotation.WebMvcConfigurer' (OnClassCondition)
+      - found 'session' scope (OnWebApplicationCondition)
+      - @ConditionalOnMissingBean (types: org.springframework.data.web.PageableHandlerMethodArgumentResolver; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   SpringDataWebAutoConfiguration#pageableCustomizer matched:
+      - @ConditionalOnMissingBean (types: org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   SpringDataWebAutoConfiguration#sortCustomizer matched:
+      - @ConditionalOnMissingBean (types: org.springframework.data.web.config.SortHandlerMethodArgumentResolverCustomizer; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   TaskExecutionAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor' (OnClassCondition)
+
+   TaskExecutorConfigurations.SimpleAsyncTaskExecutorBuilderConfiguration#simpleAsyncTaskExecutorBuilder matched:
+      - @ConditionalOnMissingBean (types: org.springframework.boot.task.SimpleAsyncTaskExecutorBuilder; SearchStrategy: all) did not find any beans (OnBeanCondition)
+      - @ConditionalOnThreading found PLATFORM (OnThreadingCondition)
+
+   TaskExecutorConfigurations.TaskExecutorBuilderConfiguration#taskExecutorBuilder matched:
+      - @ConditionalOnMissingBean (types: org.springframework.boot.task.TaskExecutorBuilder; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   TaskExecutorConfigurations.TaskExecutorConfiguration matched:
+      - @ConditionalOnMissingBean (types: java.util.concurrent.Executor; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   TaskExecutorConfigurations.TaskExecutorConfiguration#applicationTaskExecutor matched:
+      - @ConditionalOnThreading found PLATFORM (OnThreadingCondition)
+
+   TaskExecutorConfigurations.ThreadPoolTaskExecutorBuilderConfiguration#threadPoolTaskExecutorBuilder matched:
+      - @ConditionalOnMissingBean (types: org.springframework.boot.task.TaskExecutorBuilder,org.springframework.boot.task.ThreadPoolTaskExecutorBuilder; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   TemplateEngineConfigurations.DefaultTemplateEngineConfiguration#templateEngine matched:
+      - @ConditionalOnMissingBean (types: org.thymeleaf.spring6.ISpringTemplateEngine; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   ThymeleafAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.thymeleaf.templatemode.TemplateMode', 'org.thymeleaf.spring6.SpringTemplateEngine' (OnClassCondition)
+
+   ThymeleafAutoConfiguration.DefaultTemplateResolverConfiguration matched:
+      - @ConditionalOnMissingBean (names: defaultTemplateResolver; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   ThymeleafAutoConfiguration.ThymeleafSecurityDialectConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect', 'org.springframework.security.web.server.csrf.CsrfToken' (OnClassCondition)
+
+   ThymeleafAutoConfiguration.ThymeleafSecurityDialectConfiguration#securityDialect matched:
+      - @ConditionalOnMissingBean (types: org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   ThymeleafAutoConfiguration.ThymeleafWebMvcConfiguration matched:
+      - found 'session' scope (OnWebApplicationCondition)
+      - @ConditionalOnProperty (spring.thymeleaf.enabled) matched (OnPropertyCondition)
+
+   ThymeleafAutoConfiguration.ThymeleafWebMvcConfiguration.ThymeleafViewResolverConfiguration#thymeleafViewResolver matched:
+      - @ConditionalOnMissingBean (names: thymeleafViewResolver; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   UserDetailsServiceAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.security.authentication.AuthenticationManager' (OnClassCondition)
+      - AnyNestedCondition 1 matched 2 did not; NestedCondition on UserDetailsServiceAutoConfiguration.MissingAlternativeOrUserPropertiesConfigured.PasswordConfigured @ConditionalOnProperty (spring.security.user.password) did not find property 'password'; NestedCondition on UserDetailsServiceAutoConfiguration.MissingAlternativeOrUserPropertiesConfigured.NameConfigured @ConditionalOnProperty (spring.security.user.name) did not find property 'name'; NestedCondition on UserDetailsServiceAutoConfiguration.MissingAlternativeOrUserPropertiesConfigured.MissingAlternative @ConditionalOnMissingClass did not find unwanted classes 'org.springframework.security.oauth2.client.registration.ClientRegistrationRepository', 'org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector', 'org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository' (UserDetailsServiceAutoConfiguration.MissingAlternativeOrUserPropertiesConfigured)
+      - @ConditionalOnBean (types: org.springframework.security.config.annotation.ObjectPostProcessor; SearchStrategy: all) found bean 'objectPostProcessor'; @ConditionalOnMissingBean (types: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.authentication.AuthenticationProvider,org.springframework.security.core.userdetails.UserDetailsService,org.springframework.security.authentication.AuthenticationManagerResolver,org.springframework.security.oauth2.jwt.JwtDecoder; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   ValidationAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'jakarta.validation.executable.ExecutableValidator' (OnClassCondition)
+      - @ConditionalOnResource found location classpath:META-INF/services/jakarta.validation.spi.ValidationProvider (OnResourceCondition)
+
+   ValidationAutoConfiguration#defaultValidator matched:
+      - @ConditionalOnMissingBean (types: jakarta.validation.Validator; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   ValidationAutoConfiguration#methodValidationPostProcessor matched:
+      - @ConditionalOnMissingBean (types: org.springframework.validation.beanvalidation.MethodValidationPostProcessor; SearchStrategy: current) did not find any beans (OnBeanCondition)
+
+   WebMvcAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'jakarta.servlet.Servlet', 'org.springframework.web.servlet.DispatcherServlet', 'org.springframework.web.servlet.config.annotation.WebMvcConfigurer' (OnClassCondition)
+      - found 'session' scope (OnWebApplicationCondition)
+      - @ConditionalOnMissingBean (types: org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   WebMvcAutoConfiguration#formContentFilter matched:
+      - @ConditionalOnProperty (spring.mvc.formcontent.filter.enabled) matched (OnPropertyCondition)
+      - @ConditionalOnMissingBean (types: org.springframework.web.filter.FormContentFilter; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   WebMvcAutoConfiguration.EnableWebMvcConfiguration#flashMapManager matched:
+      - @ConditionalOnMissingBean (names: flashMapManager; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   WebMvcAutoConfiguration.EnableWebMvcConfiguration#localeResolver matched:
+      - @ConditionalOnMissingBean (names: localeResolver; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   WebMvcAutoConfiguration.EnableWebMvcConfiguration#themeResolver matched:
+      - @ConditionalOnMissingBean (names: themeResolver; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter#defaultViewResolver matched:
+      - @ConditionalOnMissingBean (types: org.springframework.web.servlet.view.InternalResourceViewResolver; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter#requestContextFilter matched:
+      - @ConditionalOnMissingBean (types: org.springframework.web.context.request.RequestContextListener,org.springframework.web.filter.RequestContextFilter; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter#viewResolver matched:
+      - @ConditionalOnBean (types: org.springframework.web.servlet.ViewResolver; SearchStrategy: all) found beans 'defaultViewResolver', 'beanNameViewResolver', 'mvcViewResolver'; @ConditionalOnMissingBean (names: viewResolver types: org.springframework.web.servlet.view.ContentNegotiatingViewResolver; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+
+Negative matches:
+-----------------
+
+   Cache2kCacheConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.cache2k.Cache2kBuilder' (OnClassCondition)
+
+   CacheAutoConfiguration:
+      Did not match:
+         - @ConditionalOnBean (types: org.springframework.cache.interceptor.CacheAspectSupport; SearchStrategy: all) did not find any beans of type org.springframework.cache.interceptor.CacheAspectSupport (OnBeanCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.cache.CacheManager' (OnClassCondition)
+
+   CacheAutoConfiguration.CacheManagerEntityManagerFactoryDependsOnPostProcessor:
+      Did not match:
+         - Ancestor org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration did not match (ConditionEvaluationReport.AncestorsMatchedCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean' (OnClassCondition)
+
+   CaffeineCacheConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.github.benmanes.caffeine.cache.Caffeine' (OnClassCondition)
+
+   CouchbaseCacheConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.couchbase.client.java.Cluster' (OnClassCondition)
+
+   ErrorMvcAutoConfiguration.DefaultErrorViewResolverConfiguration#conventionErrorViewResolver:
+      Did not match:
+         - @ConditionalOnBean (types: org.springframework.web.servlet.DispatcherServlet; SearchStrategy: all) did not find any beans of type org.springframework.web.servlet.DispatcherServlet (OnBeanCondition)
+
+   FreeMarkerAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'freemarker.template.Configuration' (OnClassCondition)
+
+   GenericCacheConfiguration:
+      Did not match:
+         - Cache org.springframework.boot.autoconfigure.cache.GenericCacheConfiguration unknown cache type (CacheCondition)
+
+   GroovyTemplateAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'groovy.text.markup.MarkupTemplateEngine' (OnClassCondition)
+
+   GsonAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.google.gson.Gson' (OnClassCondition)
+
+   GsonHttpMessageConvertersConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.google.gson.Gson' (OnClassCondition)
+
+   HazelcastCacheConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.hazelcast.core.HazelcastInstance' (OnClassCondition)
+
+   HypermediaAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.hateoas.EntityModel' (OnClassCondition)
+
+   InfinispanCacheConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.infinispan.spring.embedded.provider.SpringEmbeddedCacheManager' (OnClassCondition)
+
+   JCacheCacheConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'javax.cache.Caching' (OnClassCondition)
+
+   JacksonHttpMessageConvertersConfiguration.MappingJackson2XmlHttpMessageConverterConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.fasterxml.jackson.dataformat.xml.XmlMapper' (OnClassCondition)
+
+   JsonbAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.json.bind.Jsonb' (OnClassCondition)
+
+   JsonbHttpMessageConvertersConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'jakarta.json.bind.Jsonb' (OnClassCondition)
+
+   MessageSourceAutoConfiguration:
+      Did not match:
+         - ResourceBundle did not find bundle with basename messages (MessageSourceAutoConfiguration.ResourceBundleCondition)
+
+   MockMvcAutoConfiguration.WebTestClientMockMvcConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.web.reactive.function.client.WebClient' (OnClassCondition)
+
+   MockMvcWebClientAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.gargoylesoftware.htmlunit.WebClient' (OnClassCondition)
+
+   MockMvcWebDriverAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.openqa.selenium.htmlunit.HtmlUnitDriver' (OnClassCondition)
+
+   MustacheAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.samskivert.mustache.Mustache' (OnClassCondition)
+
+   OAuth2ClientAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.oauth2.client.registration.ClientRegistration' (OnClassCondition)
+
+   OAuth2ResourceServerAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.oauth2.server.resource.authentication.BearerTokenAuthenticationToken' (OnClassCondition)
+
+   RedisCacheConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.data.redis.connection.RedisConnectionFactory' (OnClassCondition)
+
+   SecurityDataConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.security.data.repository.query.SecurityEvaluationContextExtension' (OnClassCondition)
+
+   SimpleCacheConfiguration:
+      Did not match:
+         - Cache org.springframework.boot.autoconfigure.cache.SimpleCacheConfiguration unknown cache type (CacheCondition)
+
+   TaskExecutorConfigurations.SimpleAsyncTaskExecutorBuilderConfiguration#simpleAsyncTaskExecutorBuilderVirtualThreads:
+      Did not match:
+         - @ConditionalOnMissingBean (types: org.springframework.boot.task.SimpleAsyncTaskExecutorBuilder; SearchStrategy: all) found beans of type 'org.springframework.boot.task.SimpleAsyncTaskExecutorBuilder' simpleAsyncTaskExecutorBuilder (OnBeanCondition)
+
+   TaskExecutorConfigurations.TaskExecutorConfiguration#applicationTaskExecutorVirtualThreads:
+      Did not match:
+         - @ConditionalOnThreading did not find VIRTUAL (OnThreadingCondition)
+
+   TemplateEngineConfigurations.ReactiveTemplateEngineConfiguration:
+      Did not match:
+         - did not find reactive web application classes (OnWebApplicationCondition)
+
+   ThymeleafAutoConfiguration.DataAttributeDialectConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect' (OnClassCondition)
+
+   ThymeleafAutoConfiguration.ThymeleafWebFluxConfiguration:
+      Did not match:
+         - did not find reactive web application classes (OnWebApplicationCondition)
+
+   ThymeleafAutoConfiguration.ThymeleafWebLayoutConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect' (OnClassCondition)
+
+   ThymeleafAutoConfiguration.ThymeleafWebMvcConfiguration#resourceUrlEncodingFilter:
+      Did not match:
+         - @ConditionalOnEnabledResourceChain did not find class org.webjars.WebJarAssetLocator (OnEnabledResourceChainCondition)
+
+   WebMvcAutoConfiguration#hiddenHttpMethodFilter:
+      Did not match:
+         - @ConditionalOnProperty (spring.mvc.hiddenmethod.filter.enabled) did not find property 'enabled' (OnPropertyCondition)
+
+   WebMvcAutoConfiguration.ProblemDetailsErrorHandlingConfiguration:
+      Did not match:
+         - @ConditionalOnProperty (spring.mvc.problemdetails.enabled=true) did not find property 'enabled' (OnPropertyCondition)
+
+   WebMvcAutoConfiguration.ResourceChainCustomizerConfiguration:
+      Did not match:
+         - @ConditionalOnEnabledResourceChain did not find class org.webjars.WebJarAssetLocator (OnEnabledResourceChainCondition)
+
+   WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter#beanNameViewResolver:
+      Did not match:
+         - @ConditionalOnMissingBean (types: org.springframework.web.servlet.view.BeanNameViewResolver; SearchStrategy: all) found beans of type 'org.springframework.web.servlet.view.BeanNameViewResolver' beanNameViewResolver (OnBeanCondition)
+
+   WebTestClientAutoConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'org.springframework.web.reactive.function.client.WebClient' (OnClassCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2025-06-01T00:21:04.591+02:00  INFO 8036 --- [expensetracker-test] [    Test worker] b.k.e.c.ExpenseRestControllerUnitTest    : Started ExpenseRestControllerUnitTest in 1.044 seconds (process running for 14.531)
+2025-06-01T00:21:04.594+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 421, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.596+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] DependencyInjectionTestExecutionListener : Performing dependency injection for test class be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest
+2025-06-01T00:21:04.598+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 422, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.604+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 423, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.613+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] sContextBeforeModesTestExecutionListener : Before test method: class [ExpenseRestControllerUnitTest], method [updateExpense_ValidData_ShouldReturn200], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.614+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 424, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.615+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 425, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.615+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 426, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.616+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 427, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.617+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 428, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.710+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@809f75c}
+2025-06-01T00:21:04.711+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@809f75c}
+2025-06-01T00:21:04.711+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'securityContextRepository' from target object [org.springframework.security.web.context.SecurityContextHolderFilter@62408c4] or target class [class org.springframework.security.web.context.SecurityContextHolderFilter]
+2025-06-01T00:21:04.711+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@809f75c}
+2025-06-01T00:21:04.711+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@809f75c}
+2025-06-01T00:21:04.711+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Setting field 'securityContextRepository' of type [null] on target object [org.springframework.security.web.context.SecurityContextHolderFilter@62408c4] or target class [class org.springframework.security.web.context.SecurityContextHolderFilter] to value [org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors$SecurityContextRequestPostProcessorSupport$TestSecurityContextRepository@636b198]
+2025-06-01T00:21:04.711+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@809f75c}
+2025-06-01T00:21:04.713+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'tokenRepository' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.713+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@809f75c}
+2025-06-01T00:21:04.713+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'requestHandler' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.713+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@809f75c}
+2025-06-01T00:21:04.713+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Setting field 'tokenRepository' of type [null] on target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter] to value [org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors$CsrfRequestPostProcessor$TestCsrfTokenRepository@114a18d6]
+2025-06-01T00:21:04.715+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : PATCH "/api/expenses/1", parameters={masked}
+2025-06-01T00:21:04.747+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed 200 OK
+2025-06-01T00:21:04.772+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 429, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.772+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 430, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.773+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 431, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.773+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 432, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.773+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 433, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.773+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 434, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.774+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 435, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.774+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .c.s.DirtiesContextTestExecutionListener : After test method: class [ExpenseRestControllerUnitTest], method [updateExpense_ValidData_ShouldReturn200], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.775+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 436, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.777+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] DependencyInjectionTestExecutionListener : Performing dependency injection for test class be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest
+2025-06-01T00:21:04.777+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 437, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.777+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 438, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.778+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] sContextBeforeModesTestExecutionListener : Before test method: class [ExpenseRestControllerUnitTest], method [updateExpense_AccessDenied_ShouldReturn403], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.778+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 439, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.778+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 440, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.779+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 441, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.779+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 442, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.779+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 443, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.788+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@5a1bd78c}
+2025-06-01T00:21:04.788+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@5a1bd78c}
+2025-06-01T00:21:04.788+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'securityContextRepository' from target object [org.springframework.security.web.context.SecurityContextHolderFilter@62408c4] or target class [class org.springframework.security.web.context.SecurityContextHolderFilter]
+2025-06-01T00:21:04.788+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@5a1bd78c}
+2025-06-01T00:21:04.788+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'tokenRepository' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.788+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@5a1bd78c}
+2025-06-01T00:21:04.788+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'requestHandler' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.789+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : PATCH "/api/expenses/1", parameters={masked}
+2025-06-01T00:21:04.792+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed 403 FORBIDDEN
+2025-06-01T00:21:04.794+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 444, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.794+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 445, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.794+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 446, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.794+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 447, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.794+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 448, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.795+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 449, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.795+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 450, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.795+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .c.s.DirtiesContextTestExecutionListener : After test method: class [ExpenseRestControllerUnitTest], method [updateExpense_AccessDenied_ShouldReturn403], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.796+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 451, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.797+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] DependencyInjectionTestExecutionListener : Performing dependency injection for test class be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest
+2025-06-01T00:21:04.797+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 452, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.797+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 453, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.798+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] sContextBeforeModesTestExecutionListener : Before test method: class [ExpenseRestControllerUnitTest], method [createExpense_Unauthenticated_ShouldReturn403], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.799+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 454, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.799+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 455, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.799+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 456, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.803+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 457, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.804+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 458, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.804+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 459, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.804+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 460, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.804+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 461, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.804+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 462, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.805+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 463, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.805+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .c.s.DirtiesContextTestExecutionListener : After test method: class [ExpenseRestControllerUnitTest], method [createExpense_Unauthenticated_ShouldReturn403], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.806+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 464, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.806+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] DependencyInjectionTestExecutionListener : Performing dependency injection for test class be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest
+2025-06-01T00:21:04.806+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 465, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.806+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 466, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.807+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] sContextBeforeModesTestExecutionListener : Before test method: class [ExpenseRestControllerUnitTest], method [deleteExpense_ValidId_ShouldReturn204], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.807+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 467, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.808+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 468, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.808+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 469, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.808+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 470, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.809+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 471, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.814+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@6bb5270e}
+2025-06-01T00:21:04.814+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@6bb5270e}
+2025-06-01T00:21:04.814+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'securityContextRepository' from target object [org.springframework.security.web.context.SecurityContextHolderFilter@62408c4] or target class [class org.springframework.security.web.context.SecurityContextHolderFilter]
+2025-06-01T00:21:04.814+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@6bb5270e}
+2025-06-01T00:21:04.814+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'tokenRepository' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.814+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@6bb5270e}
+2025-06-01T00:21:04.815+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'requestHandler' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.815+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : DELETE "/api/expenses/1", parameters={masked}
+2025-06-01T00:21:04.817+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed 204 NO_CONTENT
+2025-06-01T00:21:04.820+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 472, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.820+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 473, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.821+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 474, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.821+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 475, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.821+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 476, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.821+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 477, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.821+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 478, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.821+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .c.s.DirtiesContextTestExecutionListener : After test method: class [ExpenseRestControllerUnitTest], method [deleteExpense_ValidId_ShouldReturn204], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.822+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 479, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.823+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] DependencyInjectionTestExecutionListener : Performing dependency injection for test class be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest
+2025-06-01T00:21:04.823+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 480, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.823+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 481, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.824+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] sContextBeforeModesTestExecutionListener : Before test method: class [ExpenseRestControllerUnitTest], method [deleteExpense_AccessDenied_ShouldReturn403], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.824+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 482, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.825+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 483, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.825+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 484, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.825+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 485, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.826+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 486, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.827+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@77a9ea73}
+2025-06-01T00:21:04.828+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@77a9ea73}
+2025-06-01T00:21:04.828+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'securityContextRepository' from target object [org.springframework.security.web.context.SecurityContextHolderFilter@62408c4] or target class [class org.springframework.security.web.context.SecurityContextHolderFilter]
+2025-06-01T00:21:04.828+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@77a9ea73}
+2025-06-01T00:21:04.828+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'tokenRepository' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.828+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@77a9ea73}
+2025-06-01T00:21:04.828+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'requestHandler' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.829+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : DELETE "/api/expenses/1", parameters={masked}
+2025-06-01T00:21:04.831+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed 403 FORBIDDEN
+2025-06-01T00:21:04.832+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 487, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.832+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 488, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.833+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 489, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.833+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 490, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.833+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 491, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.833+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 492, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.833+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 493, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.833+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .c.s.DirtiesContextTestExecutionListener : After test method: class [ExpenseRestControllerUnitTest], method [deleteExpense_AccessDenied_ShouldReturn403], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.834+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 494, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.834+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] DependencyInjectionTestExecutionListener : Performing dependency injection for test class be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest
+2025-06-01T00:21:04.834+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 495, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.834+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 496, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.836+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] sContextBeforeModesTestExecutionListener : Before test method: class [ExpenseRestControllerUnitTest], method [createExpense_UnauthenticatedWithCSRF_ShouldReturn401], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.837+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 497, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.837+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 498, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.838+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 499, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.838+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@58d5bdb0}
+2025-06-01T00:21:04.838+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'tokenRepository' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.838+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@58d5bdb0}
+2025-06-01T00:21:04.839+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'requestHandler' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.841+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 500, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.842+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 501, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.842+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 502, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.843+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 503, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.843+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 504, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.844+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 505, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.844+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 506, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.844+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .c.s.DirtiesContextTestExecutionListener : After test method: class [ExpenseRestControllerUnitTest], method [createExpense_UnauthenticatedWithCSRF_ShouldReturn401], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.845+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 507, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.845+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] DependencyInjectionTestExecutionListener : Performing dependency injection for test class be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest
+2025-06-01T00:21:04.845+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 508, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.846+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 509, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.846+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] sContextBeforeModesTestExecutionListener : Before test method: class [ExpenseRestControllerUnitTest], method [createExpense_InvalidData_ShouldReturn400], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.846+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 510, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.848+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 511, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.848+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 512, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.848+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 513, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.849+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 514, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.850+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@46b9a780}
+2025-06-01T00:21:04.850+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@46b9a780}
+2025-06-01T00:21:04.850+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'securityContextRepository' from target object [org.springframework.security.web.context.SecurityContextHolderFilter@62408c4] or target class [class org.springframework.security.web.context.SecurityContextHolderFilter]
+2025-06-01T00:21:04.851+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@46b9a780}
+2025-06-01T00:21:04.851+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'tokenRepository' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.851+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@46b9a780}
+2025-06-01T00:21:04.851+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'requestHandler' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.852+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : POST "/api/expenses", parameters={masked}
+2025-06-01T00:21:04.862+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed 400 BAD_REQUEST
+2025-06-01T00:21:04.864+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 515, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.864+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 516, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.864+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 517, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.865+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 518, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.865+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 519, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.865+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 520, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.865+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 521, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.865+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .c.s.DirtiesContextTestExecutionListener : After test method: class [ExpenseRestControllerUnitTest], method [createExpense_InvalidData_ShouldReturn400], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.866+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 522, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.866+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] DependencyInjectionTestExecutionListener : Performing dependency injection for test class be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest
+2025-06-01T00:21:04.866+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 523, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.866+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 524, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.867+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] sContextBeforeModesTestExecutionListener : Before test method: class [ExpenseRestControllerUnitTest], method [createExpense_UserNotFound_ShouldReturn400], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.867+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 525, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.867+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 526, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.867+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 527, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.867+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 528, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.868+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 529, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.870+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@6f1c9f54}
+2025-06-01T00:21:04.870+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@6f1c9f54}
+2025-06-01T00:21:04.870+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'securityContextRepository' from target object [org.springframework.security.web.context.SecurityContextHolderFilter@62408c4] or target class [class org.springframework.security.web.context.SecurityContextHolderFilter]
+2025-06-01T00:21:04.870+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@6f1c9f54}
+2025-06-01T00:21:04.870+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'tokenRepository' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.870+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@6f1c9f54}
+2025-06-01T00:21:04.870+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'requestHandler' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.871+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : POST "/api/expenses", parameters={masked}
+2025-06-01T00:21:04.873+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed 400 BAD_REQUEST
+2025-06-01T00:21:04.874+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 530, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.874+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 531, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.874+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 532, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.874+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 533, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.874+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 534, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.874+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 535, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.875+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 536, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.875+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .c.s.DirtiesContextTestExecutionListener : After test method: class [ExpenseRestControllerUnitTest], method [createExpense_UserNotFound_ShouldReturn400], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.875+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 537, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.875+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] DependencyInjectionTestExecutionListener : Performing dependency injection for test class be.kdg.expensetracker.controller.ExpenseRestControllerUnitTest
+2025-06-01T00:21:04.877+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 538, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.877+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 539, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.878+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] sContextBeforeModesTestExecutionListener : Before test method: class [ExpenseRestControllerUnitTest], method [createExpense_ValidData_ShouldReturn201], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.878+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 540, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.878+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 541, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.878+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 542, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.878+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 543, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.879+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 544, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.881+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@3248a82c}
+2025-06-01T00:21:04.881+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@3248a82c}
+2025-06-01T00:21:04.881+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'securityContextRepository' from target object [org.springframework.security.web.context.SecurityContextHolderFilter@62408c4] or target class [class org.springframework.security.web.context.SecurityContextHolderFilter]
+2025-06-01T00:21:04.881+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@3248a82c}
+2025-06-01T00:21:04.881+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'tokenRepository' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.881+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Invoking method 'getFilters' on target object [FilterChainProxy[Filter Chains: null]] or target class [null] with arguments {org.springframework.mock.web.MockHttpServletRequest@3248a82c}
+2025-06-01T00:21:04.881+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.test.util.ReflectionTestUtils        : Getting field 'requestHandler' from target object [org.springframework.security.web.csrf.CsrfFilter@42f623e1] or target class [class org.springframework.security.web.csrf.CsrfFilter]
+2025-06-01T00:21:04.882+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : POST "/api/expenses", parameters={masked}
+2025-06-01T00:21:04.884+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed 201 CREATED
+2025-06-01T00:21:04.885+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 545, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.886+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 546, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.886+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 547, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.886+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 548, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.886+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 549, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.886+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 550, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.886+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 551, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.887+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .c.s.DirtiesContextTestExecutionListener : After test method: class [ExpenseRestControllerUnitTest], method [createExpense_ValidData_ShouldReturn201], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]
+2025-06-01T00:21:04.887+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] org.springframework.test.context.cache   : Spring test ApplicationContext cache statistics: [DefaultContextCache@2e2b1310 size = 3, maxSize = 32, parentContextCount = 0, hitCount = 552, missCount = 3, failureCount = 0]
+2025-06-01T00:21:04.887+02:00 DEBUG 8036 --- [expensetracker-test] [    Test worker] .c.s.DirtiesContextTestExecutionListener : After test class: class [ExpenseRestControllerUnitTest], class annotated with @DirtiesContext [false] with mode [null]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
