@@ -1,0 +1,66 @@
+# GitLab CI/CD configuration for Expense Tracker
+
+# Define the Docker image to use
+image: eclipse-temurin:21-jdk
+
+# Define variables
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  POSTGRES_DB: "expensetracker_test"
+  POSTGRES_USER: "test"
+  POSTGRES_PASSWORD: "test"
+  # For connecting to PostgreSQL service
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/expensetracker_test"
+  SPRING_DATASOURCE_USERNAME: "test"
+  SPRING_DATASOURCE_PASSWORD: "test"
+  SPRING_PROFILES_ACTIVE: "test"
+
+# Define cache settings
+cache:
+  key: "$CI_COMMIT_REF_NAME"
+  paths:
+    - .gradle/
+    - build/
+
+# Define pipeline stages
+stages:
+  - build
+  - test
+
+# Before script - runs before each job
+before_script:
+  - chmod +x ./gradlew
+  - echo "Using Java version:"
+  - java -version
+
+# Build stage
+build:
+  stage: build
+  script:
+    - echo "Building the application..."
+    - ./gradlew clean build -x test
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 hour
+
+# Test stage
+test:
+  stage: test
+  # PostgreSQL service for tests
+  services:
+    - name: postgres:15-alpine
+      alias: postgres
+  script:
+    - echo "Running tests..."
+    - ./gradlew test --info
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - build/test-results/test/**/TEST-*.xml
+    paths:
+      - build/reports/tests/test/
+    expire_in: 1 week
+  dependencies:
+    - build

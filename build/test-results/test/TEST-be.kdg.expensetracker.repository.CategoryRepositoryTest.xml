@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="be.kdg.expensetracker.repository.CategoryRepositoryTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-05-30T08:18:58" hostname="WIN-8VD49MJ8CQH" time="0.855">
+<testsuite name="be.kdg.expensetracker.repository.CategoryRepositoryTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-05-31T07:18:56" hostname="WIN-8VD49MJ8CQH" time="1.006">
   <properties/>
-  <testcase name="testDeleteCategory_WithNoExpenses_ShouldSucceed()" classname="be.kdg.expensetracker.repository.CategoryRepositoryTest" time="0.173"/>
-  <testcase name="testFindByName_ShouldReturnCorrectCategory()" classname="be.kdg.expensetracker.repository.CategoryRepositoryTest" time="0.173"/>
-  <testcase name="testFindByName_ShouldReturnEmptyForNonExistentCategory()" classname="be.kdg.expensetracker.repository.CategoryRepositoryTest" time="0.17"/>
-  <testcase name="testCategoryNameUniqueness_ShouldThrowExceptionForDuplicateName()" classname="be.kdg.expensetracker.repository.CategoryRepositoryTest" time="0.175"/>
-  <testcase name="testCategoryNameNotNull_ShouldThrowException()" classname="be.kdg.expensetracker.repository.CategoryRepositoryTest" time="0.163"/>
-  <system-out><![CDATA[2025-05-30T10:18:58.472+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [be.kdg.expensetracker.repository.CategoryRepositoryTest]: CategoryRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-05-30T10:18:58.478+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration be.kdg.expensetracker.ExpenseTrackerApplication for test class be.kdg.expensetracker.repository.CategoryRepositoryTest
-2025-05-30T10:18:59.169+02:00  WARN 6732 --- [expensetracker-test] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 23505, SQLState: 23505
-2025-05-30T10:18:59.169+02:00 ERROR 6732 --- [expensetracker-test] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_6 ON PUBLIC.CATEGORIES(NAME NULLS FIRST) VALUES ( /* 113 */ 'Food' )"; SQL statement:
+  <testcase name="testDeleteCategory_WithNoExpenses_ShouldSucceed()" classname="be.kdg.expensetracker.repository.CategoryRepositoryTest" time="0.218"/>
+  <testcase name="testFindByName_ShouldReturnCorrectCategory()" classname="be.kdg.expensetracker.repository.CategoryRepositoryTest" time="0.192"/>
+  <testcase name="testFindByName_ShouldReturnEmptyForNonExistentCategory()" classname="be.kdg.expensetracker.repository.CategoryRepositoryTest" time="0.203"/>
+  <testcase name="testCategoryNameUniqueness_ShouldThrowExceptionForDuplicateName()" classname="be.kdg.expensetracker.repository.CategoryRepositoryTest" time="0.199"/>
+  <testcase name="testCategoryNameNotNull_ShouldThrowException()" classname="be.kdg.expensetracker.repository.CategoryRepositoryTest" time="0.192"/>
+  <system-out><![CDATA[2025-05-31T09:18:56.730+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [be.kdg.expensetracker.repository.CategoryRepositoryTest]: CategoryRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-05-31T09:18:56.740+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration be.kdg.expensetracker.ExpenseTrackerApplication for test class be.kdg.expensetracker.repository.CategoryRepositoryTest
+2025-05-31T09:18:57.554+02:00  WARN 28516 --- [expensetracker-test] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 23505, SQLState: 23505
+2025-05-31T09:18:57.554+02:00 ERROR 28516 --- [expensetracker-test] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_6 ON PUBLIC.CATEGORIES(NAME NULLS FIRST) VALUES ( /* 113 */ 'Food' )"; SQL statement:
 insert into categories (description,name,id) values (?,?,default) [23505-224]
-2025-05-30T10:18:59.338+02:00  WARN 6732 --- [expensetracker-test] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 23502, SQLState: 23502
-2025-05-30T10:18:59.338+02:00 ERROR 6732 --- [expensetracker-test] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : NULL not allowed for column "NAME"; SQL statement:
+2025-05-31T09:18:57.752+02:00  WARN 28516 --- [expensetracker-test] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 23502, SQLState: 23502
+2025-05-31T09:18:57.752+02:00 ERROR 28516 --- [expensetracker-test] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : NULL not allowed for column "NAME"; SQL statement:
 insert into categories (description,name,id) values (?,?,default) [23502-224]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

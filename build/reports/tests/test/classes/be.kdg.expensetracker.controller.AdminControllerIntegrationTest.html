@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.191s</div>
+<div class="counter">1.323s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,22 +79,22 @@
 </thead>
 <tr>
 <td class="success">adminDashboard_AsAdmin_ShouldShowDashboard()</td>
-<td class="success">0.507s</td>
+<td class="success">0.551s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">adminDashboard_AsManager_ShouldReturn403()</td>
-<td class="success">0.177s</td>
+<td class="success">0.202s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">adminDashboard_AsRegularUser_ShouldReturn403()</td>
-<td class="success">0.179s</td>
+<td class="success">0.193s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">adminDashboard_WithoutAuthentication_ShouldRedirectToLogin()</td>
-<td class="success">0.328s</td>
+<td class="success">0.377s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -102,8 +102,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2025-05-30T10:18:50.979+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [be.kdg.expensetracker.controller.AdminControllerIntegrationTest]: AdminControllerIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-05-30T10:18:50.994+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration be.kdg.expensetracker.ExpenseTrackerApplication for test class be.kdg.expensetracker.controller.AdminControllerIntegrationTest
+<pre>2025-05-31T09:18:47.028+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [be.kdg.expensetracker.controller.AdminControllerIntegrationTest]: AdminControllerIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-05-31T09:18:47.047+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration be.kdg.expensetracker.ExpenseTrackerApplication for test class be.kdg.expensetracker.controller.AdminControllerIntegrationTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -113,27 +113,27 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.3)
 
-2025-05-30T10:18:51.015+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] b.k.e.c.AdminControllerIntegrationTest   : Starting AdminControllerIntegrationTest using Java 21.0.4 with PID 6732 (started by user in C:\Users\user\Desktop\spring-backend)
-2025-05-30T10:18:51.016+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] b.k.e.c.AdminControllerIntegrationTest   : The following 1 profile is active: &quot;test&quot;
-2025-05-30T10:18:51.150+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-30T10:18:51.167+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 4 JPA repository interfaces.
-2025-05-30T10:18:51.232+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-30T10:18:51.235+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-05-30T10:18:51.240+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-30T10:18:51.241+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2025-05-30T10:18:51.242+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:testdb user=SA
-2025-05-30T10:18:51.242+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2025-05-30T10:18:51.242+02:00  WARN 6732 --- [expensetracker-test] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-05-30T10:18:51.324+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-05-30T10:18:51.333+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-05-30T10:18:51.435+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2025-05-30T10:18:51.537+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
-2025-05-30T10:18:51.587+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2025-05-30T10:18:51.587+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2025-05-30T10:18:51.588+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2025-05-30T10:18:51.593+02:00  INFO 6732 --- [expensetracker-test] [    Test worker] b.k.e.c.AdminControllerIntegrationTest   : Started AdminControllerIntegrationTest in 0.596 seconds (process running for 7.254)
-2025-05-30T10:18:52.514+02:00  WARN 6732 --- [expensetracker-test] [    Test worker] actStandardFragmentInsertionTagProcessor : [THYMELEAF][Test worker][admin/dashboard] Deprecated unwrapped fragment expression &quot;fragments/layout :: header('admin')&quot; found in template admin/dashboard, line 10, col 10. Please use the complete syntax of fragment expressions instead (&quot;~{fragments/layout :: header('admin')}&quot;). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
-2025-05-30T10:18:52.587+02:00  WARN 6732 --- [expensetracker-test] [    Test worker] actStandardFragmentInsertionTagProcessor : [THYMELEAF][Test worker][admin/dashboard] Deprecated unwrapped fragment expression &quot;fragments/layout :: footer&quot; found in template admin/dashboard, line 76, col 10. Please use the complete syntax of fragment expressions instead (&quot;~{fragments/layout :: footer}&quot;). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-05-31T09:18:47.072+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] b.k.e.c.AdminControllerIntegrationTest   : Starting AdminControllerIntegrationTest using Java 21.0.4 with PID 28516 (started by user in C:\Users\user\Desktop\spring-backend)
+2025-05-31T09:18:47.072+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] b.k.e.c.AdminControllerIntegrationTest   : The following 1 profile is active: &quot;test&quot;
+2025-05-31T09:18:47.233+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-31T09:18:47.248+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 4 JPA repository interfaces.
+2025-05-31T09:18:47.325+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-31T09:18:47.328+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-31T09:18:47.339+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-31T09:18:47.340+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2025-05-31T09:18:47.342+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:testdb user=SA
+2025-05-31T09:18:47.342+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2025-05-31T09:18:47.343+02:00  WARN 28516 --- [expensetracker-test] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-31T09:18:47.429+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-31T09:18:47.441+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-31T09:18:47.540+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-05-31T09:18:47.677+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-05-31T09:18:47.721+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-05-31T09:18:47.722+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-05-31T09:18:47.723+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-05-31T09:18:47.729+02:00  INFO 28516 --- [expensetracker-test] [    Test worker] b.k.e.c.AdminControllerIntegrationTest   : Started AdminControllerIntegrationTest in 0.679 seconds (process running for 7.62)
+2025-05-31T09:18:48.762+02:00  WARN 28516 --- [expensetracker-test] [    Test worker] actStandardFragmentInsertionTagProcessor : [THYMELEAF][Test worker][admin/dashboard] Deprecated unwrapped fragment expression &quot;fragments/layout :: header('admin')&quot; found in template admin/dashboard, line 10, col 10. Please use the complete syntax of fragment expressions instead (&quot;~{fragments/layout :: header('admin')}&quot;). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-05-31T09:18:48.844+02:00  WARN 28516 --- [expensetracker-test] [    Test worker] actStandardFragmentInsertionTagProcessor : [THYMELEAF][Test worker][admin/dashboard] Deprecated unwrapped fragment expression &quot;fragments/layout :: footer&quot; found in template admin/dashboard, line 76, col 10. Please use the complete syntax of fragment expressions instead (&quot;~{fragments/layout :: footer}&quot;). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
 </pre>
 </span>
 </div>
@@ -145,7 +145,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.10</a> at May 30, 2025, 10:19:03 AM</p>
+<a href="http://www.gradle.org">Gradle 8.10</a> at May 31, 2025, 9:19:02 AM</p>
 </div>
 </div>
 </body>

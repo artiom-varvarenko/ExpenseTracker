@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-05-30T10:18:40+0200",
+    date = "2025-05-31T09:18:37+0200",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.10.jar, environment: Java 21.0.4 (Amazon.com Inc.)"
 )
 @Component
@@ -30,6 +30,8 @@ public class ExpenseMapperImpl implements ExpenseMapper {
         expenseDto.setDescription( expense.getDescription() );
         expenseDto.setAmount( expense.getAmount() );
         expenseDto.setDate( expense.getDate() );
+
+        expenseDto.setCategoryIds( mapCategoryIds(expense) );
 
         return expenseDto;
     }
@@ -57,9 +59,15 @@ public class ExpenseMapperImpl implements ExpenseMapper {
             return;
         }
 
-        expense.setDescription( dto.getDescription() );
-        expense.setAmount( dto.getAmount() );
-        expense.setDate( dto.getDate() );
+        if ( dto.getDescription() != null ) {
+            expense.setDescription( dto.getDescription() );
+        }
+        if ( dto.getAmount() != null ) {
+            expense.setAmount( dto.getAmount() );
+        }
+        if ( dto.getDate() != null ) {
+            expense.setDate( dto.getDate() );
+        }
     }
 
     @Override
