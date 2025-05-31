@@ -13,7 +13,9 @@ variables:
   SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/expensetracker_test"
   SPRING_DATASOURCE_USERNAME: "test"
   SPRING_DATASOURCE_PASSWORD: "test"
-  SPRING_PROFILES_ACTIVE: "test"
+  SPRING_DATASOURCE_DRIVER: "org.postgresql.Driver"
+  SPRING_JPA_PLATFORM: "org.hibernate.dialect.PostgreSQLDialect"
+  SPRING_PROFILES_ACTIVE: "test,ci"
 
 # Define cache settings
 cache:
@@ -53,6 +55,8 @@ test:
       alias: postgres
   script:
     - echo "Running tests..."
+    # Add a delay to ensure PostgreSQL is ready
+    - sleep 5
     - ./gradlew test --info
   artifacts:
     when: always
@@ -61,6 +65,7 @@ test:
         - build/test-results/test/**/TEST-*.xml
     paths:
       - build/reports/tests/test/
+      - build/test-results/test/
     expire_in: 1 week
   dependencies:
     - build
