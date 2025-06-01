@@ -24,6 +24,8 @@ import be.kdg.expensetracker.repository.CategoryRepository;
 import be.kdg.expensetracker.repository.ExpenseCategoryRepository;
 import be.kdg.expensetracker.repository.ExpenseRepository;
 import be.kdg.expensetracker.repository.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 @Transactional
@@ -74,6 +76,7 @@ public class ExpenseService {
     }
 
     // New search method
+    @Transactional(readOnly = true)
     public List<Expense> searchExpenses(String description, String minAmount, String maxAmount) {
         List<Expense> allExpenses = expenseRepository.findAll();
 

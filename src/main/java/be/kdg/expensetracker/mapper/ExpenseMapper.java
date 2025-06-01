@@ -59,8 +59,13 @@ public interface ExpenseMapper {
             return List.of();
         }
 
-        return expense.getExpenseCategories().stream()
-                .map(ec -> ec.getCategory().getId())
-                .collect(Collectors.toList());
+        try {
+            return expense.getExpenseCategories().stream()
+                    .map(ec -> ec.getCategory().getId())
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            // If lazy loading fails, return empty list
+            return List.of();
+        }
     }
 }
