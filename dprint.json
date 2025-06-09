@@ -1,0 +1,38 @@
+{
+  "typescript": {
+    "lineWidth": 120,
+    "indentWidth": 4,
+    "semiColons": "asi",
+    "quoteStyle": "preferSingle",
+    "jsx.quoteStyle": "preferDouble",
+    "trailingCommas": "never",
+    "operatorPosition": "nextLine",
+    "conditionalExpression.preferSingleLine": false
+  },
+  "json": {
+    "lineWidth": 120,
+    "indentWidth": 2,
+    "array.preferSingleLine": true
+  },
+  "markdown": {
+    "lineWidth": 80,
+    "textWrap": "always"
+  },
+  "includes": [
+    "src/main/js/**/*.{js,json}",
+    "*.json",
+    "*.md"
+  ],
+  "excludes": [
+    "**/node_modules",
+    "**/*-lock.json",
+    "**/dist",
+    "**/build",
+    "src/main/resources/static/**"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/typescript-0.88.1.wasm",
+    "https://plugins.dprint.dev/json-0.17.4.wasm",
+    "https://plugins.dprint.dev/markdown-0.15.2.wasm"
+  ]
+}

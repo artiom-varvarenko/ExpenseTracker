@@ -1,0 +1,33 @@
+{
+  "name": "expense-tracker",
+  "version": "1.0.0",
+  "description": "Expense Tracker Frontend",
+  "type": "module",
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.6",
+    "bootstrap-icons": "^1.11.3",
+    "joi": "^17.13.3",
+    "axios": "^1.7.7",
+    "chart.js": "^4.4.6",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "mini-css-extract-plugin": "^2.9.2",
+    "sass": "1.78.0",
+    "sass-loader": "^16.0.5",
+    "webpack": "^5.99.8",
+    "webpack-cli": "^6.0.1",
+    "@eslint/js": "^9.10.0",
+    "eslint": "^9.10.0",
+    "globals": "^15.9.0",
+    "dprint": "^0.47.0"
+  },
+  "scripts": {
+    "build": "webpack",
+    "lint": "eslint",
+    "format": "dprint fmt",
+    "format:check": "dprint check"
+  }
+}

@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.3'
     id 'io.spring.dependency-management' version '1.1.4'
+    id 'com.github.node-gradle.node' version '7.1.0'
 }
 
 group = 'be.kdg'
@@ -36,3 +37,10 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+node {
+    version = '20.11.0'
+    download = true
+}
+
+processResources.dependsOn npm_run_build

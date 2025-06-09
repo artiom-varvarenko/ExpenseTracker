@@ -1,0 +1,18 @@
+# Node modules
+node_modules/
+
+# Generated bundles (will be regenerated during build)
+src/main/resources/static/js/bundle-*.js
+src/main/resources/static/css/bundle-*.css
+src/main/resources/static/js/bundle-*.js.map
+src/main/resources/static/css/bundle-*.css.map
+
+# npm debug logs
+npm-debug.log*
+
+# Editor directories
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

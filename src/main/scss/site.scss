@@ -1,0 +1,119 @@
+// Bootstrap customization variables
+$primary: #4a90e2;
+$success: #27ae60;
+$danger: #e74c3c;
+$warning: #f39c12;
+$info: #3498db;
+
+// Custom variables
+$navbar-dark-color: rgba(255, 255, 255, 0.9);
+$navbar-dark-hover-color: rgba(255, 255, 255, 1);
+$card-border-radius: 0.5rem;
+$transition-base: all 0.3s ease-in-out;
+
+// Import Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+// SCSS Feature 1: Nesting
+.navbar {
+  .navbar-brand {
+    font-weight: bold;
+
+    i {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .nav-link {
+    transition: $transition-base;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// SCSS Feature 2: Mixins
+@mixin card-hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// SCSS Feature 3: Variables and calculations
+$base-padding: 1rem;
+$large-padding: $base-padding * 2;
+
+// Custom utility classes
+.hover-card {
+  @include card-hover-effect;
+}
+
+// Expense-specific styles
+.expense-item {
+  padding: $base-padding;
+  margin-bottom: $base-padding / 2;
+  border-radius: $card-border-radius;
+
+  &.expense-high {
+    border-left: 4px solid $danger;
+  }
+
+  &.expense-medium {
+    border-left: 4px solid $warning;
+  }
+
+  &.expense-low {
+    border-left: 4px solid $success;
+  }
+}
+
+// Footer styling with nesting
+footer {
+  margin-top: $large-padding * 2;
+  padding: $large-padding 0;
+  border-top: 1px solid #e9ecef;
+
+  .footer-links {
+    a {
+      color: $primary;
+      text-decoration: none;
+      margin: 0 0.5rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Loading spinner
+.loading-spinner {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+
+  &.active {
+    display: block;
+  }
+}
+
+// Custom form styles
+.form-validation-error {
+  color: $danger;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+// Chart container
+.chart-container {
+  position: relative;
+  height: 300px;
+  margin: $base-padding 0;
+}

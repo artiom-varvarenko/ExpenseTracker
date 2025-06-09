@@ -3,22 +3,35 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <th:block th:insert="~{fragments/heading :: heading(title='Expenses')}"></th:block>
+    <script src="/js/bundle-expenses.js" defer></script>
+    <link rel="stylesheet" href="/css/bundle-expenses.css"/>
 </head>
 <body>
 <th:block th:insert="~{fragments/layout :: header(currentPage = 'expenses')}"></th:block>
 <main class="container mt-4">
     <div class="row">
         <div class="col-md-8">
-            <h2>All Expenses</h2>
+            <h2><i class="bi bi-receipt"></i> All Expenses</h2>
+            <div id="notifications"></div>
             <div id="expenses-container" class="mb-4">
                 <p>Loading expenses...</p>
+            </div>
+
+            <!-- Chart Container -->
+            <div class="card hover-card mb-4">
+                <div class="card-header">
+                    <h4><i class="bi bi-graph-up"></i> Expense Trends</h4>
+                </div>
+                <div class="card-body">
+                    <canvas id="expense-chart" class="chart-container"></canvas>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
             <div id="expense-details">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Expense Details</h4>
+                        <h4><i class="bi bi-info-circle"></i> Expense Details</h4>
                     </div>
                     <div class="card-body">
                         <p>Select an expense to view details.</p>
@@ -30,33 +43,79 @@
     <hr/>
     <div class="row mt-4">
         <div class="col-md-8">
-            <h2>User Expenses</h2>
-            
+            <h2><i class="bi bi-person-lines-fill"></i> User Expenses</h2>
+
             <!-- Content for authenticated users -->
             <div sec:authorize="isAuthenticated()" class="mb-4">
                 <div class="alert alert-success">
-                    <h4>Your Expenses</h4>
+                    <h4><i class="bi bi-check-circle"></i> Your Expenses</h4>
                     <p>Welcome, <span sec:authentication="name"></span>! Here are your personal expenses.</p>
                     <div id="personal-expenses-container">
                         <p>Loading your personal expenses...</p>
                     </div>
-                    <button id="add-expense-btn" class="btn btn-primary mt-3">Add New Expense</button>
+                    <button id="add-expense-btn" class="btn btn-primary mt-3"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Add a new expense entry">
+                        <i class="bi bi-plus-circle"></i> Add New Expense
+                    </button>
                 </div>
-                
-                <!-- Admin/Manager specific content -->
-                <div sec:authorize="hasAnyRole('ADMIN', 'MANAGER')" class="alert alert-warning mt-3">
-                    <h4>Administrative Functions</h4>
-                    <p>As an <span sec:authorize="hasRole('ADMIN')">administrator</span><span sec:authorize="hasRole('MANAGER') and !hasRole('ADMIN')">manager</span>, you have additional capabilities:</p>
-                    <div class="d-flex gap-2">
-                        <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin}" class="btn btn-danger">Admin Dashboard</a>
-                        <a sec:authorize="hasAnyRole('ADMIN', 'MANAGER')" th:href="@{/reports}" class="btn btn-warning">Reports Dashboard</a>
+
+                <!-- Add Expense Form (hidden by default) -->
+                <div id="add-expense-container" style="display: none;" class="mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4><i class="bi bi-plus-square"></i> Add New Expense</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="add-expense-form" data-validate data-ajax>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">
+                                        <i class="bi bi-card-text"></i> Description *
+                                    </label>
+                                    <input type="text" class="form-control" id="description" name="description"
+                                           required minlength="3" maxlength="100"
+                                           placeholder="Enter expense description">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="amount" class="form-label">
+                                        <i class="bi bi-currency-dollar"></i> Amount *
+                                    </label>
+                                    <input type="number" class="form-control" id="amount" name="amount"
+                                           required min="0.01" step="0.01"
+                                           placeholder="0.00">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="date" class="form-label">
+                                        <i class="bi bi-calendar-date"></i> Date *
+                                    </label>
+                                    <input type="date" class="form-control" id="date" name="date" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="userId" class="form-label">
+                                        <i class="bi bi-person"></i> User *
+                                    </label>
+                                    <select class="form-select" id="userId" name="userId" required>
+                                        <option value="">-- Select User --</option>
+                                        <option value="1">User 1</option>
+                                        <option value="2">User 2</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="bi bi-check-lg"></i> Save Expense
+                                </button>
+                                <button type="button" class="btn btn-secondary ms-2" onclick="document.getElementById('add-expense-container').style.display='none'">
+                                    <i class="bi bi-x-lg"></i> Cancel
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Content for all users -->
             <div class="form-group mb-3">
-                <label for="user-selector">Select User:</label>
+                <label for="user-selector"><i class="bi bi-funnel"></i> Filter by User:</label>
                 <select id="user-selector" class="form-control">
                     <option value="">-- Select User --</option>
                     <option value="1">User 1</option>
@@ -67,22 +126,9 @@
             <div id="user-expenses-container">
                 <p>Please select a user to view their expenses.</p>
             </div>
-            
-            <!-- Extra information for anonymous users -->
-            <div sec:authorize="!isAuthenticated()" class="mt-4">
-                <div class="alert alert-info">
-                    <h4>Want to track your own expenses?</h4>
-                    <p>Sign in or create an account to track and manage your personal expenses.</p>
-                    <div class="mt-2">
-                        <a th:href="@{/login}" class="btn btn-primary me-2">Sign In</a>
-                        <a th:href="@{/register}" class="btn btn-outline-primary">Register</a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </main>
 <th:block th:insert="~{fragments/layout :: footer}"></th:block>
-<script th:src="@{/js/expenses.js}"></script>
 </body>
-</html> 
+</html>
